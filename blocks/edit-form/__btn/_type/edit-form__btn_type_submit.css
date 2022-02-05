@@ -1,0 +1,16 @@
+.edit-form__btn_type_submit {
+  width: 70%;
+  height: 30px;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .edit-form__btn_type_submit {
+    width: 358px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

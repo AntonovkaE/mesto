@@ -1,0 +1,9 @@
+.card__button_like {
+  background-image: url(img/heart-vector.svg);
+  background-size: cover;
+  border: none;
+  width: 22px;
+  height: 19px;
+  background-color: white;
+}
+

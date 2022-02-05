@@ -1,0 +1,18 @@
+.edit-form__label {
+  font-size: 10px;
+  display: block;
+  line-height: 17px;
+  border: none;
+  position: relative;
+  margin: 0 0 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .edit-form__label {
+    font-size: 14px;
+  }
+  
+}
+.edit-form__label:last-of-type {
+  margin: 0 0 48px;
+}

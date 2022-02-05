@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="pages/index.css">
-  <link rel="stylesheet" type="text/css" href="style.css" />
   <title>mesto</title>
 </head>
 <body class="root">
@@ -19,12 +18,12 @@
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="button profile__button profile__button_edit"><img class="profile__button profile__button_icon_edit" src="img/edit.svg" alt="иконка редактирование"></button>
+            <button class="button profile__button profile__button_type_edit"><img class="profile__icon profile__icon_type_edit" src="img/edit.svg" alt="иконка редактирование"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="button profile__button profile__button_add">
-          <img class="profile__button profile__button_icon_add" src="img/add_button.svg" alt="">
+        <button class="button profile__button profile__button_type_add">
+          <img class="profile__icon profile__icon_type_add" src="img/add_button.svg" alt="">
         </button>
       </section>
       <section class="gallery">
@@ -86,24 +85,20 @@
     </main>
     <div class="popup popup_hidden">
       <div class="popup__container">
-        <div class="edit-form">
-          <button type="button" class="button btn-close edit-form__btn edit-form__btn_close" data-bs-dismiss="edit-form" aria-label="Close"><img src="/img/Close Icon.svg"></button>
-          <div class="edit-form__content">
-            <div class="edit-form__header">
-              <h2 class="edit-form__heading">Редактировать профиль</h2>
-              <div class="edit-form__name">
-                <form>
-                  <label for="name" class="edit-form__label">
-                    <input type="text" id="name" class="edit-form__item edit-form__item_el_name" placeholder="Ваше имя">
-                  </label>
-                  <label for="description" class="edit-form__label">
-                    <input type="text" id="description" class="edit-form__item edit-form__item_el_description" placeholder="О себе">
-                  </label>
-                  <button type="button" class="button edit-form__btn edit-form__btn_submit" aria-label="Сохранить">Сохранить</button>
-                </form>
-              </div>
-            </div>
+        <button type="button" class="button popup__button popup__button_type_close" data-bs-dismiss="edit-form" aria-label="Close"><img class="pop__icon popup__icon_type_close" src="/img/Close Icon.svg"></button>
+        <div class="popup__content">
+          <div class="popup__header">
+            <h2 class="popup__heading">Редактировать профиль</h2>
           </div>
+              <form class="edit-form">
+                <label for="name" class="edit-form__label">
+                  <input type="text" id="name" class="edit-form__item edit-form__item_el_name" placeholder="Ваше имя">
+                </label>
+                <label for="description" class="edit-form__label">
+                  <input type="text" id="description" class="edit-form__item edit-form__item_el_description" placeholder="О себе">
+                </label>
+                <button type="Submit" class="button edit-form__btn edit-form__btn_type_submit" aria-label="Сохранить">Сохранить</ш>
+              </form>
         </div>
       </div>
     </div>

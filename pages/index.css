@@ -1,2 +1,49 @@
 @import url(../vendor/normalize.css);
-@import url(../fonts/inter.css)
+
+@import url(../fonts/inter.css);
+
+@import url(../blocks/root/root.css);
+@import url(../blocks/page/page.css);
+
+@import url(../blocks/button/button.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__button/_type/profile__button_type_add.css);
+@import url(../blocks/profile/__button/_type/profile__button_type_edit.css);
+@import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__icon/_type/profile__icon_type_add.css);
+@import url(../blocks/profile/__icon/_type/profile__icon_type_edit.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name-block/profile__name-block.css);
+@import url(../blocks/profile/__name/profile__name.css);
+
+@import url(../blocks/gallery/gallery.css);
+
+@import url(../blocks/cards/cards.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__body/card__body.css);
+@import url(../blocks/card/__button/_like/card__button_like.css);
+@import url(../blocks/card/__button/_like/_active/card__button_like_active.css);
+@import url(../blocks/card/__img/card__img.css);
+@import url(../blocks/card/__title/card__title.css);
+
+@import url(../blocks/footer/footer.css);
+
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_open/popup_open.css);
+@import url(../blocks/popup/_hidden/popup_hidden.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__button/_type/popup__button_type_close.css);
+@import url(../blocks/popup/__content/content.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__icon/_type/popup__icon_type_close.css);
+
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__btn/_type/edit-form__btn_type_submit.css);
+@import url(../blocks/edit-form/__item/edit-form__item.css);
+@import url(../blocks/edit-form/__label/edit-form__label.css);

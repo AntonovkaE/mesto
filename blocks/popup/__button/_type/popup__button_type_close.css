@@ -1,0 +1,17 @@
+.popup__button_type_close {
+  background: none;
+  position: absolute;
+  border: none;
+  top: -20px;
+  right: -20px;
+  
+}
+
+@media screen and (min-width: 768px) {
+  .popup__button_type_close {
+    width: 32px;
+    height: 32px;
+    top: -40px;
+    right: -40px;
+  }
+}
