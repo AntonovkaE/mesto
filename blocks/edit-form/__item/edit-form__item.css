@@ -1,0 +1,6 @@
+.edit-form__item {
+  border: none;
+  height: 27px;
+  width: 100%;
+  border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+}
