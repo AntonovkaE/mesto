@@ -12,6 +12,7 @@
           flex-direction: column;
   background-color: #FFFFFF;
   color: #000000;
+  z-index: 3;
   position: relative;
   -webkit-box-pack: center;
       -ms-flex-pack: center;

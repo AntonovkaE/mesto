@@ -14,11 +14,10 @@ function openPopup() {
   popup.classList.add('popup_open');
   newName.value = name.textContent;
   newDescription.value = description.textContent;
-
 }
 
 function closePopup(evt) {
-  
+  evt.preventDefault();
   popup.classList.remove('popup_open');
   popup.classList.add('popup_hidden')
 }
