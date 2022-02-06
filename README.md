@@ -3,5 +3,5 @@
 Цель данного проекта - практика навыков верстки. Проект сделан в соответсвии с методологией БЭМ, для разметки в нем использованы flexbox, grid, реализовано модальное окно с помощью JavaScript. После сдачи в планах разработать возможность пользователю доавлять новые изображения.
 
 
-* [Ссылка на GitHub Pages](https://antonovkae.github.io/russian-travel/index.html)
+* [Ссылка на GitHub Pages](https://antonovkae.github.io/mesto/index.html)
 
