@@ -2,17 +2,18 @@ let closeButton = document.querySelector(".popup__button_type_close")
 let editForm = document.querySelector(".edit-form")
 let editButton = document.querySelector(".profile__button_type_edit")
 let popup = document.querySelector(".popup");
-let name = document.querySelector(".profile__name")
+let userName = document.querySelector(".profile__name")
 let description = document.querySelector(".profile__description")
 let newName = document.querySelector(".edit-form__item_el_name");
 let newDescription = document.querySelector(".edit-form__item_el_description");
 let likeButtons = document.querySelectorAll(".card__button_like")
 let popupContainer = document.querySelector(".popup__container")
 
-function openPopup() {
+function openPopup(evt) {
+  evt.preventDefault();
   popup.classList.remove('popup_hidden');
   popup.classList.add('popup_open');
-  newName.value = name.textContent;
+  newName.value = userName.textContent;
   newDescription.value = description.textContent;
   popupContainer.classList.add('popup__container_open')
   popupContainer.classList.remove('popup__container_hidden')
@@ -28,11 +29,11 @@ function closePopup(evt) {
 
 function submitPopup(evt) {
   evt.preventDefault();
-  console.log("ghj")
-  name.textContent = newName.value;
+  userName.textContent = newName.value;
   description.textContent = newDescription.value;
   popup.classList.remove('popup_open');
-  
+  popup.classList.add('popup_hidden')
+  popupContainer.classList.remove('popup__container_open')
 }
 
 
