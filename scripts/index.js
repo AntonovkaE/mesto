@@ -31,9 +31,7 @@ function submitPopup(evt) {
   evt.preventDefault();
   userName.textContent = newName.value;
   description.textContent = newDescription.value;
-  popup.classList.remove('popup_open');
-  popup.classList.add('popup_hidden')
-  popupContainer.classList.remove('popup__container_open')
+  closePopup(evt);
 }
 
 
