@@ -1,11 +1,10 @@
 .gallery {
   margin: 0 auto 48px;
-  width: calc(100% - 2*19px);
 }
 
 @media screen and (min-width: 1280px) {
   .gallery {
-    width: 880px;
+    width: 100%;
     margin: 0 auto 66px;
   }
 }

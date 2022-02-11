@@ -3,11 +3,18 @@
   height: 56px;
   position: relative;
   border-bottom: 1px solid #545454;
-  margin: 0 0 42px 0;
+  margin: 28px 0 42px 0;
 }
 
 @media screen and (min-width: 768px) {
   .header {
     height: 74px;
+    margin: 28px 20px 40px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    margin: 28px 0 40px 0;
   }
 }
