@@ -10,6 +10,7 @@
       -ms-flex-align: end;
           align-items: flex-end;
   white-space: break-spaces;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
