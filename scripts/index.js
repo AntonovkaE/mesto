@@ -1,13 +1,14 @@
-let closeButton = document.querySelector(".popup__button_type_close")
-let editForm = document.querySelector(".edit-form")
-let editButton = document.querySelector(".profile__button_type_edit")
-let popup = document.querySelector(".popup");
+const closeButton = document.querySelector(".popup__button_type_close")
+const editForm = document.querySelector(".edit-form")
+const editButton = document.querySelector(".profile__button_type_edit")
+const popup = document.querySelector(".popup");
+const likeButtons = document.querySelectorAll(".card__button_like")
+const popupContainer = document.querySelector(".popup__container")
 let userName = document.querySelector(".profile__name")
 let description = document.querySelector(".profile__description")
 let newName = document.querySelector(".edit-form__item_el_name");
 let newDescription = document.querySelector(".edit-form__item_el_description");
-let likeButtons = document.querySelectorAll(".card__button_like")
-let popupContainer = document.querySelector(".popup__container")
+
 
 function openPopup(evt) {
   evt.preventDefault();
