@@ -1,9 +1,10 @@
 .popup__button_type_close {
+  padding: 0;
   background: none;
   position: absolute;
   border: none;
-  top: -20px;
-  right: -20px;
+  top: -36px;
+  right: 0px;
   
 }
 

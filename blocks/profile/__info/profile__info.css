@@ -26,5 +26,6 @@
         -ms-flex-positive: 2;
             flex-grow: 2;
     margin: o auto 20px;
+    max-width: 50%;
   }
 }
