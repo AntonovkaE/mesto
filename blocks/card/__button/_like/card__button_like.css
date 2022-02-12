@@ -8,6 +8,8 @@
   background-color: transparent;
   align-self: center;
   background-repeat: no-repeat;
+  transition: opacity 0.5s ease-in-out;
+  cursor: url(../../../../img/cursor.svg), pointer;
 }
 
 .card__button_like:hover {
