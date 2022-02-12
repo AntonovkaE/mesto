@@ -10,3 +10,6 @@
   background-repeat: no-repeat;
 }
 
+.card__button_like:hover {
+  opacity: 0.5;
+}

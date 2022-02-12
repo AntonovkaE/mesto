@@ -1,6 +1,7 @@
 .button {
   background-color: #000000;
   color: #FFFFFF;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

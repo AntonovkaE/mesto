@@ -16,3 +16,7 @@
     line-height: 22px;
   }
 }
+
+.edit-form__btn_type_submit:hover {
+  opacity: .75;;
+}
