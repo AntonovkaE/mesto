@@ -32,8 +32,6 @@ const initialCards = [
   }
 ];
 
-
-
 function setEventListeners(cardElement) {
   cardElement.querySelector('.card__button_like').addEventListener('click', handleLike);
   cardElement.querySelector('.card__button_delete').addEventListener('click', handleDelete);
@@ -65,7 +63,6 @@ function openImagePopup(event) {
   popupCaption.textContent = cardElement.querySelector('.card__title').textContent
   openPopup(popup)
 }
-
 
 function openPopup(popup) {
   const closeButton = popup.querySelector(".popup__button_type_close");
