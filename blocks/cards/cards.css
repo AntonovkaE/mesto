@@ -1,5 +1,4 @@
 .cards {
-  width: 88%;
   display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
