@@ -75,7 +75,10 @@ function openPopup(popup) {
 }
 
 function openAddCardPopup() {
-  const popup = document.querySelector('popup_addCard')
+  const popup = document.querySelector('.popup_addCard')
+  console.log(popup);
+  const addForm = popup.querySelector('.form');
+  addForm.addEventListener('submit', handleAddCardFormSubmit);
   openPopup(popup); 
 }
 
@@ -107,8 +110,10 @@ function handleProfileFormSubmit(event) {
 }
 
 function handleAddCardFormSubmit(event) {
-  let newName = popup.querySelector('.form__item_el_name').value
-  let newUrl = popup.querySelector('.form__item_el_url').value
+  event.preventDefault();
+  const form = event.target;
+  let newName = form.querySelector('.form__item_el_name').value
+  let newUrl = form.querySelector('.form__item_el_url').value
   let newCard = {
     name: newName,
     link: newUrl, 
