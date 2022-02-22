@@ -74,6 +74,7 @@ function openPopup(popup) {
 }
 
 function openAddCardPopup(popupEditForm) {
+  addForm.reset()
   openPopup(popupEditForm); 
 }
 
