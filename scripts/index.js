@@ -12,7 +12,11 @@ const popupCaption = popupOpenImage.querySelector('.popup__caption')
 const popupAddCard = document.querySelector('.popup_addCard')
 const closeButtonPopupAddCard = popupAddCard.querySelector('.popup__button_type_close');
 const addForm = popupAddCard.querySelector('.form');
+const inputCardTitle = popupAddCard.querySelector('.form__item_el_name');
+const inputCardLink = popupAddCard.querySelector('.form__item_el_url');
 const popupEditForm = document.querySelector('.popup_editForm')
+const inputName = popupEditForm.querySelector(".form__item_el_name");
+const inputDescription = popupEditForm.querySelector(".form__item_el_description");
 const closeButtonEditForm = popupEditForm.querySelector('.popup__button_type_close');
 const newName = popupEditForm.querySelector('.form__item_el_name');
 const newDescription = popupEditForm.querySelector('.form__item_el_description');
@@ -91,22 +95,16 @@ function closePopup(popup) {
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
-  const form = event.target;
-  const newName = form.querySelector(".form__item_el_name");
-  const newDescription = form.querySelector(".form__item_el_description");
-  userName.textContent = newName.value;
-  description.textContent = newDescription.value;
+  userName.textContent = inputName.value;
+  description.textContent = inputDescription.value;
   closePopup(popupEditForm);
 }
 
 function handleAddCardFormSubmit(event) {
   event.preventDefault();
-  const form = event.target;
-  const newName = form.querySelector('.form__item_el_name').value
-  const newUrl = form.querySelector('.form__item_el_url').value
   const newCard = {
-    name: newName,
-    link: newUrl, 
+    name: inputCardTitle.value,
+    link: inputCardLink.value, 
   }
   cards.prepend(createCard(newCard));
   closePopup(popupAddCard);
