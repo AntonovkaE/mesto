@@ -1,0 +1,6 @@
+.form__submit_inactive {
+  color: black;
+  border: black 1 px solid;
+  opacity: 0.2;
+  background: transparent;
+}

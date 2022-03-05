@@ -1,25 +1,29 @@
 const editButton = document.querySelector(".profile__button_type_edit")
+const addCardButton = document.querySelector('.profile__button_type_add')
+
 const userName = document.querySelector(".profile__name")
 const description = document.querySelector(".profile__description")
+
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards')
-const addCardButton = document.querySelector('.profile__button_type_add')
+
 const mainBlock = document.querySelector('.page__main')
+
 const popupOpenImage = document.querySelector('.popup_openImage')
 const popupImage = popupOpenImage.querySelector('.popup__img')
 const closeButtonPopupImage = popupOpenImage.querySelector('.popup__button_type_close');
 const popupCaption = popupOpenImage.querySelector('.popup__caption')
+
 const popupAddCard = document.querySelector('.popup_addCard')
 const closeButtonPopupAddCard = popupAddCard.querySelector('.popup__button_type_close');
 const addForm = popupAddCard.querySelector('.form');
 const inputCardTitle = popupAddCard.querySelector('.form__item_el_name');
 const inputCardLink = popupAddCard.querySelector('.form__item_el_url');
+
 const popupEditForm = document.querySelector('.popup_editForm')
 const inputName = popupEditForm.querySelector(".form__item_el_name");
 const inputDescription = popupEditForm.querySelector(".form__item_el_description");
 const closeButtonEditForm = popupEditForm.querySelector('.popup__button_type_close');
-const newName = popupEditForm.querySelector('.form__item_el_name');
-const newDescription = popupEditForm.querySelector('.form__item_el_description');
 const editForm = popupEditForm.querySelector('.form');
 
 
@@ -74,17 +78,20 @@ function openImagePopup(card) {
 }
 
 function openPopup(popup) {
+  
   popup.classList.add('popup_open');
 }
 
 function openAddCardPopup(popupEditForm) {
+  enableValidation(); 
   addForm.reset()
   openPopup(popupEditForm); 
 }
 
 function openEditFormPopup(popupEditForm) {
-  newName.value = userName.textContent;
-  newDescription.value = description.textContent;
+  enableValidation(); 
+  inputName.value = userName.textContent;
+  inputDescription.value = description.textContent;
   openPopup(popupEditForm); 
 }
 
@@ -125,6 +132,91 @@ function renderCards(initialCards) {
     cards.append(createCard(card));
     })
 }
+
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    // showInputError теперь получает параметром форму, в которой
+    // находится проверяемое поле, и само это поле
+    showInputError(formElement, inputElement, inputElement.validity);
+  } else {
+    // hideInputError теперь получает параметром форму, в которой
+    // находится проверяемое поле, и само это поле
+    hideInputError(formElement, inputElement);
+  }
+}; 
+
+const showInputError = (formElement, inputElement, error) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__item_type_error');
+  if (error.valueMissing) {
+    errorElement.textContent = "Вы пропустили это поле."
+  };
+  if (error.typeMismatch) {
+    errorElement.textContent = "Введите адрес сайта."
+  };
+  if (error.tooShort) {
+    errorElement.textContent = "Минимальная длина 2 символа."
+  };
+  errorElement.classList.add('form__item-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  // Находим элемент ошибки
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  // Остальной код такой же
+  inputElement.classList.remove('form__item_type_error');
+  errorElement.classList.remove('form__item-error_active');
+  errorElement.textContent = '';
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if(hasInvalidInput(inputList)) {
+    buttonElement.classList.add('form__submit_inactive');
+  } else {
+    buttonElement.classList.remove('form__submit_inactive')
+  }
+}
+
+// function isEmpty(elem) {
+//   console.log(elem)
+//   return elem.value == "";
+// }
+
+const setFormEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(`.form__item`));
+  const buttonElement = formElement.querySelector('.form__submit');
+  if (formElement == addForm) {
+    toggleButtonState(inputList, buttonElement);
+  }
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}; 
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setFormEventListeners(formElement);
+  });
+};
+
+
+
+
+
 
 renderCards(initialCards);
 
