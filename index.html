@@ -52,6 +52,7 @@
             class="button popup__button popup__button_type_close"
             data-bs-dismiss="edit-form"
             aria-label="Close"
+            data-close=""
           >
             <img
               class="popup__icon popup__icon_type_close"
@@ -61,7 +62,7 @@
           </button>
           <div class="popup__content">
             <h2 class="popup__heading">Редактировать профиль</h2>
-            <form class="form form_edit" name="editProfile" novalidate>
+            <form class="popup__form form form_edit" name="editProfile" novalidate>
               <label for="name-input" class="form__label">
                 <input
                   type="text"
@@ -90,6 +91,7 @@
                 type="submit"
                 class="button form__submit"
                 aria-label="Сохранить"
+                name="formSubmit"
               >
                 Сохранить
               </button>
@@ -104,6 +106,7 @@
             class="button popup__button popup__button_type_close"
             data-bs-dismiss="form_edit"
             aria-label="Close"
+            data-close=""
           >
             <img
               class="popup__icon popup__icon_type_close"
@@ -113,7 +116,7 @@
           </button>
           <div class="popup__content">
             <h2 class="popup__heading">Новое место</h2>
-            <form class="form form_add" name="addForm" novalidate>
+            <form class="popup__form form form_add" name="addForm" novalidate>
               <label for="place-input" class="form__label">
                 <input
                   type="text"
@@ -141,6 +144,7 @@
                 type="submit"
                 class="button form__submit"
                 aria-label="Создать"
+                name="formSubmit"
               >
                 Создать
               </button>
@@ -185,6 +189,7 @@
         </div>
       </li>
     </template>
+    <script src="scripts/validate.js"></script>
     <script src="scripts/index.js"></script>
   </body>
 </html>

@@ -17,3 +17,11 @@
 .button:hover {
   opacity: 60%;
 }
+
+.button:focus {
+  color: red;
+}
+
+.button:visited {
+  color: aqua;
+}
