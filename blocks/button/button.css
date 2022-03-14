@@ -18,10 +18,7 @@
   opacity: 60%;
 }
 
-.button:focus {
-  color: red;
+.button:active {
+  color: white;
 }
 
-.button:visited {
-  color: aqua;
-}
