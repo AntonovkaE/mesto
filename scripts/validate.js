@@ -1,5 +1,3 @@
-
-
 const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   if (!inputElement.validity.valid) {
     showInputError(
@@ -9,7 +7,6 @@ const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
       inputErrorClass,
       errorClass
     );
-
   } else {
     hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
@@ -19,19 +16,12 @@ const handleFormSubmit = (evt) => {
   evt.preventDefault();
 };
 
-
-const showInputError = (
-  formElement,
-  inputElement,
-  validationMessage,
-  inputErrorClass,
-  errorClass
-) => {
+const showInputError = (formElement, inputElement, ...args) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
-  errorElement.textContent = validationMessage;
-  errorElement.classList.add(errorClass);
-  inputElement.style.borderBottom = '1px #FF0000 solid';
+  inputElement.classList.add(args[1]);
+  errorElement.textContent = args[0];
+  errorElement.classList.add(args[2]);
+  inputElement.style.borderBottom = "1px #FF0000 solid";
 };
 
 const hideInputError = (
@@ -44,6 +34,7 @@ const hideInputError = (
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = "";
+  inputElement.style.borderBottom = "1px rgba(0, 0, 0, 0.2) solid";
 };
 
 const hasInvalidInput = (inputList) => {
@@ -55,22 +46,17 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'disabled')
+    buttonElement.setAttribute("disabled", "disabled");
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute('disabled')
+    buttonElement.removeAttribute("disabled");
   }
 };
 
-
-const setFormEventListeners = (
-  formElement,
-  ...args
-) => {
+const setFormEventListeners = (formElement, ...args) => {
   const inputList = Array.from(formElement.querySelectorAll(args[0]));
   formElement.setAttribute("novalidate", "true");
   const inputListIterator = (inputElement) => {
-
     const handleInput = () => {
       isValid(formElement, inputElement, args[3], args[4]);
       toggleButtonState(inputList, buttonElement, args[2]);
@@ -79,12 +65,10 @@ const setFormEventListeners = (
   };
 
   const buttonElement = formElement.querySelector(args[1]);
-  toggleButtonState(inputList, buttonElement, args[2])
-
+  toggleButtonState(inputList, buttonElement, args[2]);
 
   inputList.forEach(inputListIterator);
 };
-
 
 const enableValidation = (validatorSetting) => {
   const formList = Array.from(

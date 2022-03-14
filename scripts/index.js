@@ -41,7 +41,11 @@ function openPopup(popup) {
 
 function openAddCardPopup(popupAddCard) {
   addForm.reset();
-  toggleButtonState(inputListAddForm, submitAddForm, validatorSetting.inactiveButtonClass)
+  toggleButtonState(
+    inputListAddForm,
+    submitAddForm,
+    validatorSetting.inactiveButtonClass
+  );
   openPopup(popupAddCard);
 }
 
@@ -49,10 +53,19 @@ function openEditFormPopup(popupEditForm) {
   inputName.value = userName.textContent;
   inputDescription.value = description.textContent;
   inputListEditForm.forEach((inputElement) => {
-    isValid(editForm, inputElement, validatorSetting.inputErrorClass, validatorSetting.errorClass)
-  })
-  toggleButtonState(inputListEditForm, submitEditForm, validatorSetting.inactiveButtonClass)
-  
+    isValid(
+      editForm,
+      inputElement,
+      validatorSetting.inputErrorClass,
+      validatorSetting.errorClass
+    );
+  });
+  toggleButtonState(
+    inputListEditForm,
+    submitEditForm,
+    validatorSetting.inactiveButtonClass
+  );
+
   openPopup(popupEditForm);
 }
 
@@ -111,14 +124,10 @@ closeButtonPopupImage.addEventListener("click", () =>
 closeButtonPopupAddCard.addEventListener("click", () =>
   closePopup(popupAddCard)
 );
-closeButtonEditForm.addEventListener("click", () => 
-  closePopup(popupEditForm)
-  );
+closeButtonEditForm.addEventListener("click", () => closePopup(popupEditForm));
 
 document.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("popup")) {
     closePopup(evt.target);
   }
 });
-
-

@@ -61,9 +61,12 @@ const closeButtonPopupAddCard = popupAddCard.querySelector(
 const addForm = popupAddCard.querySelector(".form");
 const inputCardTitle = popupAddCard.querySelector(".form__item_el_name");
 const inputCardLink = popupAddCard.querySelector(".form__item_el_url");
-const inputListAddForm = Array.from(addForm.querySelectorAll(validatorSetting.inputSelector));
-const submitAddForm = addForm.querySelector(validatorSetting.submitButtonSelector);
-
+const inputListAddForm = Array.from(
+  addForm.querySelectorAll(validatorSetting.inputSelector)
+);
+const submitAddForm = addForm.querySelector(
+  validatorSetting.submitButtonSelector
+);
 
 const popupEditForm = document.querySelector(".popup_editForm");
 const inputName = popupEditForm.querySelector(".form__item_el_name");
@@ -74,10 +77,9 @@ const closeButtonEditForm = popupEditForm.querySelector(
   ".popup__button_type_close"
 );
 const editForm = popupEditForm.querySelector(".form");
-const inputListEditForm = Array.from(popupEditForm.querySelectorAll(validatorSetting.inputSelector));
-const submitEditForm = editForm.querySelector(validatorSetting.submitButtonSelector)
-
-
-
-
-
+const inputListEditForm = Array.from(
+  popupEditForm.querySelectorAll(validatorSetting.inputSelector)
+);
+const submitEditForm = editForm.querySelector(
+  validatorSetting.submitButtonSelector
+);

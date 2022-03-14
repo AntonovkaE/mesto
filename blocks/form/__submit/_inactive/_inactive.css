@@ -4,3 +4,7 @@
   opacity: 0.2;
   background: transparent;
 }
+
+.form__submit:hover {
+  opacity: .2;
+}
