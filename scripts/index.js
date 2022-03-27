@@ -1,14 +1,49 @@
-function setEventListeners(cardElement, card) {
-  cardElement
-    .querySelector(".card__button_like")
-    .addEventListener("click", handleLike);
-  cardElement
-    .querySelector(".card__button_delete")
-    .addEventListener("click", handleDelete);
-  cardElement.querySelector(".card__img").addEventListener("click", () => {
-    openImagePopup(card);
-  });
-}
+// function setEventListeners(cardElement, card) {
+//   cardElement
+//     .querySelector(".card__button_like")
+//     .addEventListener("click", handleLike);
+//   cardElement
+//     .querySelector(".card__button_delete")
+//     .addEventListener("click", handleDelete);
+//   cardElement.querySelector(".card__img").addEventListener("click", () => {
+//     openImagePopup(card);
+//   });
+// }
+
+import {
+  validatorSetting,
+  initialCards,
+  editButton,
+  addCardButton,
+  userName,
+  description,
+  cardTemplate,
+  cards,
+  mainBlock,
+  popups,
+  popupOpenImage,
+  popupImage,
+  closeButtonPopupImage,
+  popupCaption,
+  popupAddCard,
+  closeButtonPopupAddCard,
+  addForm,
+  inputCardTitle,
+  inputCardLink,
+  inputListAddForm,
+  submitAddForm,
+  popupEditForm,
+  inputName,
+  inputDescription,
+  closeButtonEditForm,
+  editForm,
+  inputListEditForm,
+  submitEditForm,
+} from "./constants.js";
+
+import {Card} from './Card.js'
+
+import { toggleButtonState, handleFormSubmit, isValid} from "./validate.js";
 
 function handleLike(event) {
   const likeButton = event.target;
@@ -20,12 +55,12 @@ function handleDelete(event) {
   cardItem.remove();
 }
 
-function openImagePopup(card) {
-  popupImage.src = card.link;
-  popupImage.alt = card.name;
-  popupCaption.textContent = card.name;
-  openPopup(popupOpenImage);
-}
+// function openImagePopup(card) {
+//   popupImage.src = card.link;
+//   popupImage.alt = card.name;
+//   popupCaption.textContent = card.name;
+//   openPopup(popupOpenImage);
+// }
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -35,7 +70,6 @@ function closePopupByEsc(evt) {
 
 function openPopup(popup) {
   popup.classList.add("popup_open");
-  activePopup = popup;
   document.addEventListener("keydown", closePopupByEsc);
 }
 
@@ -84,27 +118,21 @@ function handleProfileFormSubmit(evt) {
 function handleAddCardFormSubmit(evt) {
   handleFormSubmit(evt);
 
-  const newCard = {
-    name: inputCardTitle.value,
-    link: inputCardLink.value,
-  };
-  cards.prepend(createCard(newCard));
+  cards.prepend(createCard(inputCardTitle.value, inputCardLink.value));
+
   closePopup(popupAddCard);
 }
 
-function createCard(card) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardElementImage = cardElement.querySelector(".card__img");
-  cardElementImage.src = card.link;
-  cardElementImage.alt = card.name;
-  cardElement.querySelector(".card__title").textContent = card.name;
-  setEventListeners(cardElement, card);
+function createCard(name, link) {
+  const card = new Card(name, link);
+  const cardElement = card.generateCard();
+  card._setEventListener();
   return cardElement;
 }
 
 function renderCards(initialCards) {
-  initialCards.forEach((card) => {
-    cards.append(createCard(card));
+  initialCards.forEach((elem) => {
+    cards.append(createCard(elem.name, elem.link));
   });
 }
 
@@ -131,3 +159,5 @@ document.addEventListener("click", (evt) => {
     closePopup(evt.target);
   }
 });
+
+export { openPopup };

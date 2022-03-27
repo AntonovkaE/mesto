@@ -83,3 +83,34 @@ const inputListEditForm = Array.from(
 const submitEditForm = editForm.querySelector(
   validatorSetting.submitButtonSelector
 );
+
+export {
+  validatorSetting,
+  initialCards,
+  editButton,
+  addCardButton,
+  userName,
+  description,
+  cardTemplate,
+  cards,
+  mainBlock,
+  popups,
+  popupOpenImage,
+  popupImage,
+  closeButtonPopupImage,
+  popupCaption,
+  popupAddCard,
+  closeButtonPopupAddCard,
+  addForm,
+  inputCardTitle,
+  inputCardLink,
+  inputListAddForm,
+  submitAddForm,
+  popupEditForm,
+  inputName,
+  inputDescription,
+  closeButtonEditForm,
+  editForm,
+  inputListEditForm,
+  submitEditForm,
+};

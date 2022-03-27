@@ -1,4 +1,6 @@
-const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
+import {validatorSetting} from './constants.js'
+
+export const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   if (!inputElement.validity.valid) {
     showInputError(
       formElement,
@@ -12,7 +14,7 @@ const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   }
 };
 
-const handleFormSubmit = (evt) => {
+export const handleFormSubmit = (evt) => {
   evt.preventDefault();
 };
 
@@ -43,7 +45,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+export const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.setAttribute("disabled", "disabled");
