@@ -86,19 +86,19 @@ function openAddCardPopup(popupAddCard) {
 function openEditFormPopup(popupEditForm) {
   inputName.value = userName.textContent;
   inputDescription.value = description.textContent;
-  inputListEditForm.forEach((inputElement) => {
-    isValid(
-      editForm,
-      inputElement,
-      validatorSetting.inputErrorClass,
-      validatorSetting.errorClass
-    );
-  });
-  toggleButtonState(
-    inputListEditForm,
-    submitEditForm,
-    validatorSetting.inactiveButtonClass
-  );
+  // inputListEditForm.forEach((inputElement) => {
+  //   isValid(
+  //     editForm,
+  //     inputElement,
+  //     validatorSetting.inputErrorClass,
+  //     validatorSetting.errorClass
+  //   );
+  // });
+  // toggleButtonState(
+  //   inputListEditForm,
+  //   submitEditForm,
+  //   validatorSetting.inactiveButtonClass
+  // );
 
   openPopup(popupEditForm);
 }
@@ -123,18 +123,18 @@ function handleAddCardFormSubmit(evt) {
   closePopup(popupAddCard);
 }
 
-function createCard(name, link) {
-  const card = new Card(name, link);
-  const cardElement = card.generateCard();
-  card._setEventListener();
-  return cardElement;
-}
+// function createCard(name, link) {
+//   const card = new Card(name, link);
+//   const cardElement = card.generateCard();
+//   card._setEventListener();
+//   return cardElement;
+// }
 
-function renderCards(initialCards) {
-  initialCards.forEach((elem) => {
-    cards.append(createCard(elem.name, elem.link));
-  });
-}
+// function renderCards(initialCards) {
+//   initialCards.forEach((elem) => {
+//     cards.append(createCard(elem.name, elem.link));
+//   });
+// }
 
 renderCards(initialCards);
 
