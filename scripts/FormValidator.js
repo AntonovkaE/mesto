@@ -2,7 +2,7 @@ import {
   validatorSetting
 } from "./constants.js";
 
-class FormValidator {
+export class FormValidator {
   constructor(validatorSetting, formElement) {
     this._validatorSetting = validatorSetting;
     this._formElement = formElement;
@@ -12,8 +12,8 @@ class FormValidator {
       document.querySelectorAll(validatorSetting.formSelector)
     );
     const formListIterator = (formElement) => {
-      formElement.addEventListener("submit", handleFormSubmit);
-      _setFormEventListeners(
+      this._formElement.addEventListener("submit", this._handleFormSubmit);
+      this._setFormEventListeners(
         validatorSetting.inputSelector,
         validatorSetting.submitButtonSelector,
         validatorSetting.inactiveButtonClass,
@@ -26,14 +26,14 @@ class FormValidator {
 
   _isValid (inputElement, inputErrorClass, errorClass) {
     if (!inputElement.validity.valid) {
-      showInputError(
+      this._showInputError(
         inputElement,
         inputElement.validationMessage,
         inputErrorClass,
         errorClass
       );
     } else {
-      hideInputError(inputElement, inputErrorClass, errorClass);
+      this._hideInputError(inputElement, inputErrorClass, errorClass);
     }
   };
 
@@ -67,7 +67,7 @@ class FormValidator {
     });
   };
   _toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
-    if (_hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(inactiveButtonClass);
       buttonElement.setAttribute("disabled", "disabled");
     } else {
@@ -80,16 +80,28 @@ class FormValidator {
     this._formElement.setAttribute("novalidate", "true");
     const inputListIterator = (inputElement) => {
       const handleInput = () => {
-        _isValid(inputElement, args[3], args[4]);
-        _toggleButtonState(inputList, buttonElement, args[2]);
+        this._isValid(inputElement, args[3], args[4]);
+        this._toggleButtonState(inputList, buttonElement, args[2]);
       };
       inputElement.addEventListener("input", handleInput);
     };
   
     const buttonElement = this._formElement.querySelector(args[1]);
-    _toggleButtonState(inputList, buttonElement, args[2]);
+    this._toggleButtonState(inputList, buttonElement, args[2]);
   
     inputList.forEach(inputListIterator);
   };
 
 }
+
+// class AddCardFormValidator extends FormValidator {
+//   constructor() {
+
+//   }
+// }
+
+// class EditFormValidator extends FormValidator {
+//   constructor() {
+
+//   }
+// }

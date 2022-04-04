@@ -41,26 +41,52 @@ import {
   submitEditForm,
 } from "./constants.js";
 
+// import {validatorSetting, addForm, editForm} from './constants.js'
+import {FormValidator} from './FormValidator.js'
+
+
 import {Card} from './Card.js'
 
-import { toggleButtonState, handleFormSubmit, isValid} from "./validate.js";
+// import {EditFormValidator, AddCardFormValidator} from './validate.beforeEnter(el) {
+//   console.log('beforeEnter');
+// },
+// enter(el, done) {
+//   console.log('enter');
+//   done();
+// },
+// beforeLeave(el) {
+//   console.log('beforeLeave');
+// },
+// leave(el, done) {
+//   console.log('leave');
+//   done();
+// },'
 
-function handleLike(event) {
-  const likeButton = event.target;
-  likeButton.classList.toggle("card__button_like_active");
-}
 
-function handleDelete(event) {
-  const cardItem = event.target.parentNode;
-  cardItem.remove();
-}
+// import { toggleButtonState, handleFormSubmit, isValid} from "./validate.js";
 
-function openImagePopup(card) {
-  popupImage.src = card.link;
-  popupImage.alt = card.name;
-  popupCaption.textContent = card.name;
-  openPopup(popupOpenImage);
-}
+// function handleLike(event) {
+//   const likeButton = event.target;
+//   likeButton.classList.toggle("card__button_like_active");
+// }
+
+// function handleDelete(event) {
+//   const cardItem = event.target.parentNode;
+//   cardItem.remove();
+// }
+
+// function openImagePopup(card) {
+//   popupImage.src = card.link;
+//   popupImage.alt = card.name;
+//   popupCaption.textContent = card.name;
+//   openPopup(popupOpenImage);
+// }
+
+const EditFormValidator = new FormValidator(validatorSetting, editForm)
+const AddCardFormValidator = new FormValidator(validatorSetting, addForm )
+
+EditFormValidator.enableValidation();
+AddCardFormValidator.enableValidation();
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -75,11 +101,11 @@ function openPopup(popup) {
 
 function openAddCardPopup(popupAddCard) {
   addForm.reset();
-  toggleButtonState(
-    inputListAddForm,
-    submitAddForm,
-    validatorSetting.inactiveButtonClass
-  );
+  // toggleButtonState(
+  //   inputListAddForm,
+  //   submitAddForm,
+  //   validatorSetting.inactiveButtonClass
+  // );
   openPopup(popupAddCard);
 }
 
@@ -109,32 +135,32 @@ function closePopup(popup) {
 }
 
 function handleProfileFormSubmit(evt) {
-  handleFormSubmit(evt);
+  // handleFormSubmit(evt);
   userName.textContent = inputName.value;
   description.textContent = inputDescription.value;
   closePopup(popupEditForm);
 }
 
 function handleAddCardFormSubmit(evt) {
-  handleFormSubmit(evt);
+  // handleFormSubmit(evt);
 
   cards.prepend(createCard(inputCardTitle.value, inputCardLink.value));
 
   closePopup(popupAddCard);
 }
 
-// function createCard(name, link) {
-//   const card = new Card(name, link);
-//   const cardElement = card.generateCard();
-//   card._setEventListener();
-//   return cardElement;
-// }
+function createCard(name, link) {
+  const card = new Card(name, link);
+  const cardElement = card.generateCard();
+  card._setEventListener();
+  return cardElement;
+}
 
-// function renderCards(initialCards) {
-//   initialCards.forEach((elem) => {
-//     cards.append(createCard(elem.name, elem.link));
-//   });
-// }
+function renderCards(initialCards) {
+  initialCards.forEach((elem) => {
+    cards.append(createCard(elem.name, elem.link));
+  });
+}
 
 renderCards(initialCards);
 

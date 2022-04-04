@@ -1,4 +1,13 @@
-import {validatorSetting} from './constants.js'
+import {validatorSetting, addForm, editForm} from './constants.js'
+import {FormValidator} from './FormValidator.js'
+
+const EditFormValidator = new FormValidator(validatorSetting, editForm)
+const AddCardFormValidator = new FormValidator(validatorSetting, addForm )
+
+EditFormValidator.enableValidation();
+AddCardFormValidator.enableValidation();
+
+export {EditFormValidator, AddCardFormValidator}
 
 // export const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
 //   if (!inputElement.validity.valid) {
@@ -90,4 +99,6 @@ import {validatorSetting} from './constants.js'
 //   formList.forEach(formListIterator);
 // };
 
-enableValidation(validatorSetting);
+// enableValidation(validatorSetting);
+
+
