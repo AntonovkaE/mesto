@@ -55,12 +55,12 @@ function handleDelete(event) {
   cardItem.remove();
 }
 
-// function openImagePopup(card) {
-//   popupImage.src = card.link;
-//   popupImage.alt = card.name;
-//   popupCaption.textContent = card.name;
-//   openPopup(popupOpenImage);
-// }
+function openImagePopup(card) {
+  popupImage.src = card.link;
+  popupImage.alt = card.name;
+  popupCaption.textContent = card.name;
+  openPopup(popupOpenImage);
+}
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
