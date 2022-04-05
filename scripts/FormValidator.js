@@ -27,12 +27,9 @@ export class FormValidator {
   }
 
   _isValid(inputElement) {
-    console.log(inputElement);
     if (!inputElement.validity.valid) {
-      console.log("show");
       this._showInputError(inputElement.validationMessage, inputElement);
     } else {
-      console.log("hide");
       this._hideInputError(inputElement);
     }
   }
