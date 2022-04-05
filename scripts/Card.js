@@ -1,4 +1,4 @@
-import { openPopup,  } from "./index.js";
+import { openPopup } from "./index.js";
 import {
   cardTemplate,
   popupOpenImage,
@@ -33,7 +33,7 @@ export class Card {
   }
 
   _setEventListener() {
-    const likeButton = this._element.querySelector(".card__button_like")
+    const likeButton = this._element.querySelector(".card__button_like");
     likeButton.addEventListener("click", () => this._handleLike(likeButton));
     this._element
       .querySelector(".card__button_delete")
@@ -48,7 +48,6 @@ export class Card {
   }
 
   _handleDelete() {
-
     this._element.remove();
   }
 }
