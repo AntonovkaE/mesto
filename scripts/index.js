@@ -18,6 +18,7 @@ import {
   inputDescription,
   buttonCloseEditForm,
   formEditProfile,
+  popups,
 } from "./constants.js";
 
 import { FormValidator } from "./FormValidator.js";
@@ -109,10 +110,14 @@ buttonClosePopupAddCard.addEventListener("click", () =>
 );
 buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
 
-document.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("popup")) {
-    closePopup(evt.target);
-  }
-});
+// document.addEventListener("click", (evt) => {
+//   if (evt.target.classList.contains("popup")) {
+//     closePopup(evt.target);
+//   }
+// });
+
+popups.forEach(popup =>  {
+  popup.addEventListener('click', (evt) => closePopup(evt.target))
+})
 
 export { openPopup };

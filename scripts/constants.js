@@ -96,4 +96,5 @@ export {
   inputDescription,
   buttonCloseEditForm,
   formEditProfile,
+  popups
 };
