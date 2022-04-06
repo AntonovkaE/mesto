@@ -19,9 +19,11 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector(".card__img").src = this._link;
-    this._element.querySelector(".card__img").alt = this._name;
+    this._card = this._element.querySelector(".card__img")
+    this._card.src = this._link;
+    this._card.alt = this._name;
     this._element.querySelector(".card__title").textContent = this._name;
+    this._setEventListener();
     return this._element;
   }
 
@@ -33,8 +35,8 @@ export class Card {
   }
 
   _setEventListener() {
-    const likeButton = this._element.querySelector(".card__button_like");
-    likeButton.addEventListener("click", () => this._handleLike(likeButton));
+    this._likeButton = this._element.querySelector(".card__button_like");
+    this._likeButton.addEventListener("click", () => this._handleLike());
     this._element
       .querySelector(".card__button_delete")
       .addEventListener("click", () => this._handleDelete());
@@ -43,11 +45,12 @@ export class Card {
     });
   }
 
-  _handleLike(likeButton) {
-    likeButton.classList.toggle("card__button_like_active");
+  _handleLike() {
+    this._likeButton.classList.toggle("card__button_like_active");
   }
 
   _handleDelete() {
     this._element.remove();
+    this._element = null;
   }
 }

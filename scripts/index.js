@@ -82,7 +82,6 @@ function handleAddCardFormSubmit(evt) {
 function createCard(name, link) {
   const card = new Card(name, link);
   const cardElement = card.generateCard();
-  card._setEventListener();
   return cardElement;
 }
 
