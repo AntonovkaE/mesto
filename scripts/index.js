@@ -105,16 +105,13 @@ formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 buttonClosePopupImage.addEventListener("click", () =>
   closePopup(popupOpenImage)
 );
+
+buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
+
 buttonClosePopupAddCard.addEventListener("click", () =>
   closePopup(popupAddCard)
 );
-buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
 
-// document.addEventListener("click", (evt) => {
-//   if (evt.target.classList.contains("popup")) {
-//     closePopup(evt.target);
-//   }
-// });
 
 popups.forEach(popup =>  {
   popup.addEventListener('click', (evt) => closePopup(evt.target))
