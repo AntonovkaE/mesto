@@ -5,14 +5,13 @@ export class FormValidator {
   }
 
   _showInputError(errorMessage, inputElement) {
-    const { inputErrorClass, errorClass } = this._validatorSetting;
+    const {inputErrorClass, errorClass} = this._validatorSetting;
     const errorElement = this._formElement.querySelector(
       `.${inputElement.id}-error`
     );
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(errorClass);
-    inputElement.classList.add("form__item_error");
   }
   _hideInputError(inputElement) {
     const { inputErrorClass, errorClass } = this._validatorSetting;
@@ -68,7 +67,6 @@ export class FormValidator {
     this._inputList = Array.from(
       this._formElement.querySelectorAll(inputSelector)
     );
-    this._formElement.setAttribute("novalidate", "true");
     const inputListIterator = (inputElement) => {
       const handleInput = () => {
         this._isValid(inputElement);
