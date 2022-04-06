@@ -45,7 +45,7 @@ function openPopup(popup) {
 function openAddCardPopup(popupAddCard) {
   addForm.reset();
   addCardFormValidator.resetErrors();
-  addCardFormValidator.disableSubmitButton();
+  addCardFormValidator.toggleButtonState();
   openPopup(popupAddCard);
 }
 
