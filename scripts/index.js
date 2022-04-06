@@ -1,36 +1,34 @@
 import {
   validatorSetting,
   initialCards,
-  editButton,
-  addCardButton,
+  buttonTypeEdit,
+  buttonAddCard,
   userName,
   description,
   cards,
   popupOpenImage,
-  closeButtonPopupImage,
+  buttonClosePopupImage,
   popupAddCard,
-  closeButtonPopupAddCard,
-  addForm,
+  buttonClosePopupAddCard,
+  formAddCard,
   inputCardTitle,
   inputCardLink,
   popupEditForm,
   inputName,
   inputDescription,
-  closeButtonEditForm,
-  editForm,
+  buttonCloseEditForm,
+  formEditProfile,
 } from "./constants.js";
 
-import {FormValidator} from './FormValidator.js'
+import { FormValidator } from "./FormValidator.js";
 
+import { Card } from "./Card.js";
 
-import {Card} from './Card.js'
-
-const editFormValidator = new FormValidator(validatorSetting, editForm)
-const addCardFormValidator = new FormValidator(validatorSetting, addForm )
+const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
+const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -64,7 +62,7 @@ function closePopup(popup) {
 }
 
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault()
+  evt.preventDefault();
   userName.textContent = inputName.value;
   description.textContent = inputDescription.value;
 
@@ -72,7 +70,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 function handleAddCardFormSubmit(evt) {
-  evt.preventDefault()
+  evt.preventDefault();
 
   cards.prepend(createCard(inputCardTitle.value, inputCardLink.value));
 
@@ -93,21 +91,23 @@ function renderCards(initialCards) {
 
 renderCards(initialCards);
 
-editButton.addEventListener("click", () => openEditFormPopup(popupEditForm));
+buttonTypeEdit.addEventListener("click", () =>
+  openEditFormPopup(popupEditForm)
+);
 
-addCardButton.addEventListener("click", () => openAddCardPopup(popupAddCard));
+buttonAddCard.addEventListener("click", () => openAddCardPopup(popupAddCard));
 
-addForm.addEventListener("submit", handleAddCardFormSubmit);
+formAddCard.addEventListener("submit", handleAddCardFormSubmit);
 
-editForm.addEventListener("submit", handleProfileFormSubmit);
+formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 
-closeButtonPopupImage.addEventListener("click", () =>
+buttonClosePopupImage.addEventListener("click", () =>
   closePopup(popupOpenImage)
 );
-closeButtonPopupAddCard.addEventListener("click", () =>
+buttonClosePopupAddCard.addEventListener("click", () =>
   closePopup(popupAddCard)
 );
-closeButtonEditForm.addEventListener("click", () => closePopup(popupEditForm));
+buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
 
 document.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("popup")) {

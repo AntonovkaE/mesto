@@ -22,7 +22,6 @@ export class FormValidator {
     errorElement.classList.remove(errorClass);
     errorElement.textContent = "";
     inputElement.classList.remove("form__item_error");
-    // inputElement.style.borderBottom = "1px rgba(0, 0, 0, 0.2) solid";
   }
 
   _isValid(inputElement) {
@@ -62,7 +61,7 @@ export class FormValidator {
     }
   }
   _setFormEventListeners = () => {
-    const { inputSelector, submitButtonSelector, inactiveButtonClass } =
+    const { inputSelector, submitButtonSelector} =
       this._validatorSetting;
     this._inputList = Array.from(
       this._formElement.querySelectorAll(inputSelector)

@@ -34,8 +34,8 @@ const initialCards = [
   },
 ];
 
-const editButton = document.querySelector(".profile__button_type_edit");
-const addCardButton = document.querySelector(".profile__button_type_add");
+const buttonTypeEdit = document.querySelector(".profile__button_type_edit");
+const buttonAddCard = document.querySelector(".profile__button_type_add");
 
 const userName = document.querySelector(".profile__name");
 const description = document.querySelector(".profile__description");
@@ -49,68 +49,51 @@ const popups = Array.from(document.querySelectorAll(".popup"));
 
 const popupOpenImage = document.querySelector(".popup_openImage");
 const popupImage = popupOpenImage.querySelector(".popup__img");
-const closeButtonPopupImage = popupOpenImage.querySelector(
+const buttonClosePopupImage = popupOpenImage.querySelector(
   ".popup__button_type_close"
 );
 const popupCaption = popupOpenImage.querySelector(".popup__caption");
 
 const popupAddCard = document.querySelector(".popup_addCard");
-const closeButtonPopupAddCard = popupAddCard.querySelector(
+const buttonClosePopupAddCard = popupAddCard.querySelector(
   ".popup__button_type_close"
 );
-const addForm = popupAddCard.querySelector(".form");
+const formAddCard = popupAddCard.querySelector(".form");
 const inputCardTitle = popupAddCard.querySelector(".form__item_el_name");
 const inputCardLink = popupAddCard.querySelector(".form__item_el_url");
-const inputListAddForm = Array.from(
-  addForm.querySelectorAll(validatorSetting.inputSelector)
-);
-const submitAddForm = addForm.querySelector(
-  validatorSetting.submitButtonSelector
-);
 
 const popupEditForm = document.querySelector(".popup_editForm");
 const inputName = popupEditForm.querySelector(".form__item_el_name");
 const inputDescription = popupEditForm.querySelector(
   ".form__item_el_description"
 );
-const closeButtonEditForm = popupEditForm.querySelector(
+const buttonCloseEditForm = popupEditForm.querySelector(
   ".popup__button_type_close"
 );
-const editForm = popupEditForm.querySelector(".form");
-const inputListEditForm = Array.from(
-  popupEditForm.querySelectorAll(validatorSetting.inputSelector)
-);
-const submitEditForm = editForm.querySelector(
-  validatorSetting.submitButtonSelector
-);
+const formEditProfile = popupEditForm.querySelector(".form");
 
 export {
   validatorSetting,
   initialCards,
-  editButton,
-  addCardButton,
+  buttonTypeEdit,
+  buttonAddCard,
   userName,
   description,
   cardTemplate,
   cards,
   mainBlock,
-  popups,
   popupOpenImage,
   popupImage,
-  closeButtonPopupImage,
+  buttonClosePopupImage,
   popupCaption,
   popupAddCard,
-  closeButtonPopupAddCard,
-  addForm,
+  buttonClosePopupAddCard,
+  formAddCard,
   inputCardTitle,
   inputCardLink,
-  inputListAddForm,
-  submitAddForm,
   popupEditForm,
   inputName,
   inputDescription,
-  closeButtonEditForm,
-  editForm,
-  inputListEditForm,
-  submitEditForm,
+  buttonCloseEditForm,
+  formEditProfile,
 };
