@@ -21,7 +21,6 @@ export class FormValidator {
     inputElement.classList.remove(inputErrorClass);
     errorElement.classList.remove(errorClass);
     errorElement.textContent = "";
-    inputElement.classList.remove("form__item_error");
   }
 
   _isValid(inputElement) {
