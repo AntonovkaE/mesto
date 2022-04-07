@@ -79,7 +79,7 @@ function handleAddCardFormSubmit(evt) {
 }
 
 function createCard(name, link) {
-  const card = new Card(name, link);
+  const card = new Card(name, link, "#card");
   const cardElement = card.generateCard();
   return cardElement;
 }
