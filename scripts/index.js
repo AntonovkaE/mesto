@@ -116,8 +116,8 @@ formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 //   }
 // });
 
-popups.forEach(popup =>  {
-  popup.addEventListener('click', (evt) => closePopup(evt.target))
-})
+// popups.forEach(popup =>  {
+//   popup.addEventListener('click', (evt) => closePopup(evt.target))
+// })
 
 export { openPopup };
