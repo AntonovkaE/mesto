@@ -28,12 +28,12 @@ export class Card {
     return this._element;
   }
 
-  _openImagePopup() {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupCaption.textContent = this._name;
-    openPopup(popupOpenImage);
-  }
+  // _openImagePopup() {
+  //   popupImage.src = this._link;
+  //   popupImage.alt = this._name;
+  //   popupCaption.textContent = this._name;
+  //   openPopup(popupOpenImage);
+  // }
 
   _setEventListener() {
     this._likeButton = this._element.querySelector(".card__button_like");
