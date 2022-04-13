@@ -19,11 +19,11 @@ import {
   buttonCloseEditForm,
   formEditProfile,
   popups,
-} from "./constants.js";
+} from "../scripts/constants.js";
 
-import { FormValidator } from "./FormValidator.js";
+import { FormValidator } from "../scripts/FormValidator.js";
 
-import { Card } from "./Card.js";
+import { Card } from "../scripts/Card.js";
 
 const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
@@ -120,4 +120,4 @@ formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 //   popup.addEventListener('click', (evt) => closePopup(evt.target))
 // })
 
-export { openPopup };
+// export { openPopup };

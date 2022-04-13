@@ -1,4 +1,4 @@
-import { openPopup } from "./index.js";
+// import { openPopup } from "../src/index.js";
 import {
   cardTemplate,
   popupOpenImage,
@@ -26,6 +26,12 @@ export class Card {
     this._element.querySelector(".card__title").textContent = this._name;
     this._setEventListener();
     return this._element;
+  }
+  handleCardClick() {
+    popupImage.src = this._link;
+    popupImage.alt = this._name;
+    popupCaption.textContent = this._name;
+    // openPopup(popupOpenImage);
   }
 
   // _openImagePopup() {
