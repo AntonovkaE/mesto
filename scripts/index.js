@@ -31,16 +31,16 @@ const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-function closePopupByEsc(evt) {
-  if (evt.key === "Escape") {
-    closePopup(document.querySelector(".popup_open"));
-  }
-}
+// function closePopupByEsc(evt) {
+//   if (evt.key === "Escape") {
+//     closePopup(document.querySelector(".popup_open"));
+//   }
+// }
 
-function openPopup(popup) {
-  popup.classList.add("popup_open");
-  document.addEventListener("keydown", closePopupByEsc);
-}
+// function openPopup(popup) {
+//   popup.classList.add("popup_open");
+//   document.addEventListener("keydown", closePopupByEsc);
+// }
 
 function openAddCardPopup(popupAddCard) {
   addForm.reset();
@@ -57,10 +57,10 @@ function openEditFormPopup(popupEditForm) {
   openPopup(popupEditForm);
 }
 
-function closePopup(popup) {
-  popup.classList.remove("popup_open");
-  document.removeEventListener("keydown", closePopupByEsc);
-}
+// function closePopup(popup) {
+//   popup.classList.remove("popup_open");
+//   document.removeEventListener("keydown", closePopupByEsc);
+// }
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -102,13 +102,13 @@ formAddCard.addEventListener("submit", handleAddCardFormSubmit);
 
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 
-buttonClosePopupImage.addEventListener("click", () =>
-  closePopup(popupOpenImage)
-);
-buttonClosePopupAddCard.addEventListener("click", () =>
-  closePopup(popupAddCard)
-);
-buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
+// buttonClosePopupImage.addEventListener("click", () =>
+//   closePopup(popupOpenImage)
+// );
+// buttonClosePopupAddCard.addEventListener("click", () =>
+//   closePopup(popupAddCard)
+// );
+// buttonCloseEditForm.addEventListener("click", () => closePopup(popupEditForm));
 
 // document.addEventListener("click", (evt) => {
 //   if (evt.target.classList.contains("popup")) {
