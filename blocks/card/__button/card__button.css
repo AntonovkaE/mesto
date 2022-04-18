@@ -6,7 +6,7 @@
   align-self: center;
   background-repeat: no-repeat;
   transition: opacity 0.5s ease-in-out;
-  cursor: url(../../../../img/cursor.svg), pointer;
+  cursor: pointer;
 }
 
 .card__button:hover {

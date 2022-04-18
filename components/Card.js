@@ -4,13 +4,14 @@ import {
   popupOpenImage,
   popupImage,
   popupCaption,
-} from "./constants.js";
+} from "../utils/constants.js";
 
 export class Card {
-  constructor(name, link, templateSelector) {
+  constructor(name, link, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -27,18 +28,18 @@ export class Card {
     this._setEventListener();
     return this._element;
   }
-  handleCardClick() {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupCaption.textContent = this._name;
-    // openPopup(popupOpenImage);
-  }
-
-  // _openImagePopup() {
+  // handleCardClick() {
   //   popupImage.src = this._link;
   //   popupImage.alt = this._name;
   //   popupCaption.textContent = this._name;
   //   openPopup(popupOpenImage);
+  // }
+
+  // _openImagePopup() {
+  //   // popupImage.src = this._link;
+  //   // popupImage.alt = this._name;
+  //   // popupCaption.textContent = this._name;
+  //   handleCardClick(popupOpenImage);
   // }
 
   _setEventListener() {
@@ -48,7 +49,7 @@ export class Card {
       .querySelector(".card__button_delete")
       .addEventListener("click", () => this._handleDelete());
     this._element.querySelector(".card__img").addEventListener("click", () => {
-      this._openImagePopup();
+      this._handleCardClick();
     });
   }
 
