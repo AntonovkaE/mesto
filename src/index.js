@@ -45,7 +45,6 @@ addCardFormValidator.enableValidation();
 //   document.addEventListener("keydown", closePopupByEsc);
 // }
 const popupOpenImage = new PopupWithImage('.popup_openImage') 
-console.log(popupOpenImage)
 
 const cardsList = new Section({
   item: initialCards,
@@ -70,15 +69,20 @@ cardsList.renderItems()
 
 //   closePopup(popupEditForm);
 // }
-const popupEditForm = new PopupWithForm('.popup_editForm', (formValues) => {
-  const user = new UserInfo('.profile__name', '.profile__description');
-  user.setUserInfo()
-  popupEditForm.setEventListeners();
+
+const user = new UserInfo('.profile__name', '.profile__description');
+// user.setUserInfo(user.getUserInfo());
+
+const popupEditForm = new PopupWithForm('.popup_editForm', (formData) => {
+  user.setUserInfo(formData)  
+  console.log(formData)
   // userName.textContent = formValues.name-input;
   // description.textContent = inputName.description-input;
   // popupEditForm.setEventListeners();
-  popupEditForm.close()
+  // popupEditForm.close()
 })
+popupEditForm.setEventListeners();
+
 
 const popupAddCard = new PopupWithForm('.popup', (formValues) => {
   cards.prepend(createCard(formValues.input, formValues.url-input));
@@ -117,13 +121,13 @@ const popupAddCard = new PopupWithForm('.popup', (formValues) => {
 //   closePopup(popupAddCard);
 // }
 
-function createCard(name, link) {
-  const card = new Card(name, link, "#card", (name, link) => {
-    PopupWithImage.open(name, link)
-  });
-  const cardElement = card.generateCard();
-  return cardElement;
-}
+// function createCard(name, link) {
+//   const card = new Card(name, link, "#card", (name, link) => {
+//     PopupWithImage.open(name, link)
+//   });
+//   const cardElement = card.generateCard();
+//   return cardElement;
+// }
 
 // function renderCards(initialCards) {
 //   initialCards.forEach((elem) => {
@@ -134,7 +138,6 @@ function createCard(name, link) {
 // renderCards(initialCards);
 
 buttonTypeEdit.addEventListener("click", () => {
-  console.log(popupEditForm)
   popupEditForm.open()}
 );
 
@@ -162,4 +165,3 @@ buttonAddCard.addEventListener("click", () => openAddCardPopup(popupAddCard));
 //   popup.addEventListener('click', (evt) => closePopup(evt.target))
 // })
 
-export {createCard}
