@@ -20,9 +20,13 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
+    console.log('cds')
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
+      console.log('get inputs')
+      this.close()
+      console.log('close')
     });
     //  должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
   }
@@ -32,7 +36,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popup.reset();
+    this._popup.querySelector('form').reset();
     //  ак как при закрытии попапа форма должна ещё и сбрасываться.
   }
 }

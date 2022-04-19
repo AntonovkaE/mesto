@@ -9,12 +9,12 @@ export default class Popup {
   }
   close() {
     this._popup.classList.remove("popup_open");
-    document.removeEventListener("keydown", closePopupByEsc);
+    document.removeEventListener("keydown", (evt) => this._handleEscClose(evt));
   }
 
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      closePopup(document.querySelector(".popup_open"));
+      this.close();
     }
   }
 

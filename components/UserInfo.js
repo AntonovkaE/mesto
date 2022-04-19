@@ -15,7 +15,6 @@ export default class UserInfo {
   }
 
   setUserInfo({nameInput, descriptionInput}) {
-    console.log(descriptionInput)
     this._name.textContent = nameInput;
     this._description.textContent = descriptionInput;
   }
