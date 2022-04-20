@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="pages/index.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="pages/index.css" /> -->
     <title>mesto</title>
     <style></style>
   </head>
   <body class="root">
     <div class="page">
       <header class="header">
-        <img src="img/logo.svg" alt="место" class="header__logo" />
+        <img src="<%=require('../img/logo.svg')%>" alt="место" class="header__logo" />
       </header>
       <main class="page__main">
         <section class="profile">
           <img
-            src="img/image.jpg"
+            src="<%=require('../img/image.jpg')%>"
             alt="фото пользователя"
             class="profile__avatar"
           />
@@ -26,7 +26,7 @@
               <button class="button profile__button profile__button_type_edit">
                 <img
                   class="profile__icon profile__icon_type_edit"
-                  src="img/edit.svg"
+                  src="<%=require('../img/edit.svg')%>"
                   alt="иконка редактирование"
                 />
               </button>
@@ -36,7 +36,7 @@
           <button class="button profile__button profile__button_type_add">
             <img
               class="profile__icon profile__icon_type_add"
-              src="img/add_button.svg"
+              src="<%=require('../img/add_button.svg')%>"
               alt="плюс"
             />
           </button>
@@ -45,18 +45,18 @@
           <ul class="cards"></ul>
         </section>
       </main>
-      <div class="popup popup_editForm">
+      <div class="popup popup_editForm popup__close-area">
         <div class="popup__container">
           <button
             type="button"
-            class="button popup__button popup__button_type_close"
+            class="button popup__button popup__button_type_close popup__close-area"
             data-bs-dismiss="edit-form"
             aria-label="Close"
             data-close=""
           >
             <img
               class="popup__icon popup__icon_type_close"
-              src="img/CloseIcon.svg"
+              src="<%=require('../img/CloseIcon.svg')%>"
               alt="крестик"
             />
           </button>
@@ -70,6 +70,7 @@
               <label for="name-input" class="form__label">
                 <input
                   type="text"
+                  name="nameInput"
                   id="name-input"
                   class="form__item form__item_el_name"
                   placeholder="Ваше имя"
@@ -82,6 +83,7 @@
               <label for="description-input" class="form__label">
                 <input
                   type="text"
+                  name="descriptionInput"
                   id="description-input"
                   class="form__item form__item_el_description"
                   placeholder="О себе"
@@ -103,20 +105,20 @@
           </div>
         </div>
       </div>
-      <div class="popup popup_addCard">
+      <div class="popup popup_addCard popup__close-area">
         <div class="popup__container">
           <button
             type="button"
-            class="button popup__button popup__button_type_close"
+            class="button popup__button popup__button_type_close popup__close-area"
             data-bs-dismiss="form_edit"
             aria-label="Close"
             data-close=""
           >
-            <img
-              class="popup__icon popup__icon_type_close"
-              src="img/CloseIcon.svg"
-              alt="крестик"
-            />
+          <img
+          class="popup__icon popup__icon_type_close"
+          src="<%=require('../img/CloseIcon.svg')%>"
+          alt="крестик"
+        />
           </button>
           <div class="popup__content">
             <h2 class="popup__heading">Новое место</h2>
@@ -124,6 +126,7 @@
               <label for="place-input" class="form__label">
                 <input
                   type="text"
+                  name="placeInput"
                   id="place-input"
                   class="form__item form__item_el_name"
                   placeholder="Название"
@@ -137,6 +140,7 @@
                 <input
                   type="url"
                   id="url-input"
+                  name="urlInput"
                   class="form__item form__item_el_url"
                   placeholder="Ссылка на картинку"
                   minlength="2"
@@ -156,17 +160,17 @@
           </div>
         </div>
       </div>
-      <div class="popup popup_openImage">
+      <div class="popup popup_openImage popup__close-area">
         <div class="popup__container popup__container_image">
           <button
             type="button"
-            class="button popup__button popup__button_type_close"
+            class="button popup__button popup__button_type_close popup__close-area"
             data-bs-dismiss="form_add"
             aria-label="Close"
           >
             <img
               class="popup__icon popup__icon_type_close"
-              src="img/CloseIcon.svg"
+              src="<%=require('../img/CloseIcon.svg')%>"
               alt="крестик"
             />
           </button>
@@ -190,8 +194,8 @@
         </div>
       </li>
     </template>
-    <script type="module" src="scripts/constants.js"></script>
+    <!-- <script type="module" src="scripts/constants.js"></script>
     <script type="module" src="scripts/index.js"></script>
-    <script type="module" src="scripts/Card.js"></script>
+    <script type="module" src="scripts/Card.js"></script> -->
   </body>
 </html>

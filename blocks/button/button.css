@@ -2,7 +2,7 @@
   background-color: #000000;
   transition: opacity 0.5s ease-in-out;
   color: #FFFFFF;
-  cursor: url(../../img/cursor.svg), pointer;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
