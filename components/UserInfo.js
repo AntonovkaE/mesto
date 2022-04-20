@@ -1,5 +1,3 @@
-import { inputCardLink } from "../utils/constants";
-
 export default class UserInfo {
 	constructor(selectorName, selectorDescription) {
     this._name = document.querySelector(selectorName);
@@ -11,7 +9,7 @@ export default class UserInfo {
       decription: this._description.textContent
     };
     return user;
-    //  возвращает объект с данными пользователя. Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
+  
   }
 
   setUserInfo({nameInput, descriptionInput}) {

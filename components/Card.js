@@ -1,11 +1,3 @@
-// import { openPopup } from "../src/index.js";
-import {
-  cardTemplate,
-  popupOpenImage,
-  popupImage,
-  popupCaption,
-} from "../utils/constants.js";
-
 export class Card {
   constructor(name, link, templateSelector, handleCardClick) {
     this._name = name;
@@ -28,19 +20,6 @@ export class Card {
     this._setEventListener();
     return this._element;
   }
-  // handleCardClick() {
-  //   popupImage.src = this._link;
-  //   popupImage.alt = this._name;
-  //   popupCaption.textContent = this._name;
-  //   openPopup(popupOpenImage);
-  // }
-
-  // _openImagePopup() {
-  //   // popupImage.src = this._link;
-  //   // popupImage.alt = this._name;
-  //   // popupCaption.textContent = this._name;
-  //   handleCardClick(popupOpenImage);
-  // }
 
   _setEventListener() {
     this._likeButton = this._element.querySelector(".card__button_like");
