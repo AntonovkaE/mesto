@@ -7,7 +7,6 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    //  который собирает данные всех полей формы.
     this._inputList = this._popup.querySelectorAll(".form__item");
 
     this._formValues = {};
@@ -20,15 +19,13 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    console.log('cds')
+    console.log('vf')
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      console.log('get inputs')
+      console.log('setEvent')
       this.close()
-      console.log('close')
     });
-    //  должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
   }
   open() {
     super.open();
@@ -37,6 +34,5 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._popup.querySelector('form').reset();
-    //  ак как при закрытии попапа форма должна ещё и сбрасываться.
   }
 }
