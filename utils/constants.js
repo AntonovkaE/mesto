@@ -72,6 +72,14 @@ const buttonCloseEditForm = popupEditForm.querySelector(
 );
 const formEditProfile = popupEditForm.querySelector(".form");
 
+const selectorCardList = ".cards";
+
+const popupConfig = {
+  addCardSelector: ".popup_addCard",
+  editFormSelector: ".popup_editForm",
+  openImageSelector: ".popup_openImage"
+}
+
 export {
   validatorSetting,
   initialCards,
@@ -96,5 +104,7 @@ export {
   inputDescription,
   buttonCloseEditForm,
   formEditProfile,
-  popups
+  popups,
+  selectorCardList,
+  popupConfig
 };
