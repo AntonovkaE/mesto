@@ -5,7 +5,7 @@
   background: transparent;
 }
 
-.form__submit:hover {
+.form__submit_inactive:hover {
   opacity: .2;
   cursor: default;
 }

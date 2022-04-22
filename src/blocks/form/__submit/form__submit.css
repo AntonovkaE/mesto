@@ -20,5 +20,6 @@
 
 .form__submit:hover {
   opacity: .8;
+  cursor: pointer;
 }
 
