@@ -5,30 +5,35 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-40/cards", {
-      headers: {
-        authorization: "242a0c65-83ea-4aa5-aad5-7b82cd182540",
-      },
-    })
-    .then((res) => {if (res.ok)  {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
-    )}
-
-  getUserData () {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-40/users/me', {
-      headers: {
-        authorization: "242a0c65-83ea-4aa5-aad5-7b82cd182540",
-      },
-    })
-    .then(res => {
+    return fetch(this._baseUrl + "/cards", {
+      headers: this._headers,
+    }).then((res) => {
       if (res.ok) {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
-}
 
+  getUserData() {
+    return fetch(this._baseUrl + "/users/me", {
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  saveUserData(nameInput, descriptionInput) {
+    fetch(this._baseUrl + "/users/me", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameInput,
+        about: descriptionInput,
+      }),
+    });
+  }
+}

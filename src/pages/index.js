@@ -104,7 +104,7 @@ popupOpenImage.setEventListeners();
 
 // 
 
-const user = new UserInfo(".profile__name", ".profile__description");
+const user = new UserInfo(".profile__name", ".profile__description", api);
 
 const popupEditForm = new PopupWithForm(editFormSelector, (formData) => {
   user.setUserInfo(formData);
