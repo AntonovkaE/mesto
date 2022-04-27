@@ -7,6 +7,7 @@ const validatorSetting = {
   errorClass: "form__item-error_active",
 };
 
+
 const initialCards = [
   {
     name: "Архыз",
@@ -39,6 +40,7 @@ const buttonAddCard = document.querySelector(".profile__button_type_add");
 
 const userName = document.querySelector(".profile__name");
 const description = document.querySelector(".profile__description");
+const userAvatar = document.querySelector(".profile__avatar")
 
 const cardTemplate = document.querySelector("#card").content;
 const cards = document.querySelector(".cards");
@@ -106,5 +108,6 @@ export {
   formEditProfile,
   popups,
   selectorCardList,
-  popupConfig
+  popupConfig,
+  userAvatar
 };
