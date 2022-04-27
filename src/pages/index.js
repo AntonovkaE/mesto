@@ -39,16 +39,17 @@ const api = new Api({
 
 // console.log(api)
 
-
+let cardsList; 
 api.getInitialCards()
   .then((result) => {
     const initialCards = result.map(item => {const obj = {name: item.name, link: item.link}
     return obj})
-    const cardsList = new Section(
+    cardsList = new Section(
       {
         item: initialCards,
         renderer: (item) => {
           cardsList.addItem(createCard(item.name, item.link, "#card"));
+          
         },
       },
       selectorCardList
@@ -115,6 +116,7 @@ const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
     cardsList.addItemToTop(createCard(placeInput, urlInput, "#card"));
+    api.saveNewCard(placeInput, urlInput)
   }
 );
 popupAddCard.setEventListeners();

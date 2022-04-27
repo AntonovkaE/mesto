@@ -15,6 +15,16 @@ export default class Api {
     });
   }
 
+  saveNewCard(nameInput, linkInput) {
+    fetch(this._baseUrl + "/cards", {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameInput,
+        link: linkInput,
+    })
+  })}
+
   getUserData() {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
