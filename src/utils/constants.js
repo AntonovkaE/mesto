@@ -79,7 +79,8 @@ const selectorCardList = ".cards";
 const popupConfig = {
   addCardSelector: ".popup_addCard",
   editFormSelector: ".popup_editForm",
-  openImageSelector: ".popup_openImage"
+  openImageSelector: ".popup_openImage",
+  deleteCardSelector: ".popup_deleteCard"
 }
 
 export {

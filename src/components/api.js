@@ -22,9 +22,10 @@ export default class Api {
       body: JSON.stringify({
         name: nameInput,
         link: linkInput,
-        likes: likes
-    })
-  })}
+        likes: likes,
+      }),
+    });
+  }
 
   getUserData() {
     return fetch(this._baseUrl + "/users/me", {
@@ -48,8 +49,48 @@ export default class Api {
     });
   }
 
-  // saveLikes (card, count) {
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject("Произошла ошибка");
+    });
+  }
 
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+      body: JSON.stringify({
+        user: this.getUserData(),
+      }),
+    });
+  }
 
-  // }
+  deleteLike(id) {
+    return fetch(this._baseUrl + /cards/ + id + "/likes", {
+      method: "DELETE",
+      headers: this._headers,
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject("Произошла ошибка");
+  });
+}
+//  getLikeCount(id) {
+//   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+//     headers: this._headers,
+//   }).then((res) => {
+//     if (res.ok) {
+//       return res.json();
+//     }
+//     return Promise.reject(`Ошибка: ${res.status}`);
+//   });
+// }
+
 }

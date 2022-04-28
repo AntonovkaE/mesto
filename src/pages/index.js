@@ -23,7 +23,7 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import { Card } from "../components/Card.js";
 import "../pages/index.css";
-const { addCardSelector, editFormSelector, openImageSelector } = popupConfig;
+const { addCardSelector, editFormSelector, openImageSelector, deleteCardSelector } = popupConfig;
 
 const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
@@ -42,16 +42,14 @@ let cardsList;
 api
   .getInitialCards()
   .then((result) => {
-    const initialCards = result.map((item) => {
-      const obj = { name: item.name, link: item.link, likes: item.likes };
-      return obj;
-    });
+    const initialCards = result.map((item) => ({ name: item.name, link: item.link, likes: item.likes, id: item._id})
+  )
     cardsList = new Section(
       {
         item: initialCards,
         renderer: (item) => {
           cardsList.addItem(
-            createCard(item.name, item.link, "#card", item.likes, user)
+            createCard(item, "#card", user, api)
           );
         },
       },
@@ -89,10 +87,10 @@ api.getUserData().then((result) => {
 //       console.log(result);
 //     });
 
-function createCard(name, link, selector, likes, user) {
-  const card = new Card(name, link, selector, likes, user, () => {
-    popupOpenImage.open(link, name);
-  });
+function createCard(cardData, selector, user) {
+  const card = new Card(cardData, selector, user, api, () => {
+    popupOpenImage.open(cardData.link, cardData.name);
+  }, () => popupDeleteCard.open());
   return card.generateCard();
 }
 
@@ -102,7 +100,6 @@ addCardFormValidator.enableValidation();
 const popupOpenImage = new PopupWithImage(openImageSelector);
 popupOpenImage.setEventListeners();
 
-//
 
 const user = new UserInfo(".profile__name", ".profile__description", api);
 
@@ -114,11 +111,21 @@ popupEditForm.setEventListeners();
 const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
-    cardsList.addItemToTop(createCard(placeInput, urlInput, "#card", [], user));
+    cardsList.addItemToTop(createCard({name: placeInput, link: urlInput, likes: []}, "#card", user, api));
+
     api.saveNewCard(placeInput, urlInput, []);
   }
 );
 popupAddCard.setEventListeners();
+
+const popupDeleteCard = new PopupWithForm(
+  deleteCardSelector, 
+  () => {
+    // card.handleDelete()
+
+  }
+)
+popupDeleteCard.setEventListeners();
 
 buttonTypeEdit.addEventListener("click", () => {
   inputName.value = userName.textContent;
