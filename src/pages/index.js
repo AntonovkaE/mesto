@@ -1,6 +1,5 @@
 import {
   validatorSetting,
-  // initialCards,
   buttonTypeEdit,
   buttonAddCard,
   userName,
@@ -18,7 +17,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo";
-import Api from "../components/api"
+import Api from "../components/api";
 
 import { FormValidator } from "../components/FormValidator.js";
 
@@ -39,17 +38,21 @@ const api = new Api({
 
 // console.log(api)
 
-let cardsList; 
-api.getInitialCards()
+let cardsList;
+api
+  .getInitialCards()
   .then((result) => {
-    const initialCards = result.map(item => {const obj = {name: item.name, link: item.link}
-    return obj})
+    const initialCards = result.map((item) => {
+      const obj = { name: item.name, link: item.link, likes: item.likes };
+      return obj;
+    });
     cardsList = new Section(
       {
         item: initialCards,
         renderer: (item) => {
-          cardsList.addItem(createCard(item.name, item.link, "#card"));
-          
+          cardsList.addItem(
+            createCard(item.name, item.link, "#card", item.likes, user)
+          );
         },
       },
       selectorCardList
@@ -58,15 +61,13 @@ api.getInitialCards()
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  }); 
+  });
 
-api.getUserData()  
-.then((result) => {
+api.getUserData().then((result) => {
   userName.textContent = result.name;
   description.textContent = result.about;
   userAvatar.src = result.avatar;
-})
-
+});
 
 // fetch("https://mesto.nomoreparties.co/v1/cohort-40/cards", {
 //   headers: {
@@ -86,10 +87,10 @@ api.getUserData()
 //     .then(res => res.json())
 //     .then((result) => {
 //       console.log(result);
-//     });  
+//     });
 
-function createCard(name, link, selector) {
-  const card = new Card(name, link, selector, () => {
+function createCard(name, link, selector, likes, user) {
+  const card = new Card(name, link, selector, likes, user, () => {
     popupOpenImage.open(link, name);
   });
   return card.generateCard();
@@ -101,9 +102,7 @@ addCardFormValidator.enableValidation();
 const popupOpenImage = new PopupWithImage(openImageSelector);
 popupOpenImage.setEventListeners();
 
-
-
-// 
+//
 
 const user = new UserInfo(".profile__name", ".profile__description", api);
 
@@ -115,8 +114,8 @@ popupEditForm.setEventListeners();
 const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
-    cardsList.addItemToTop(createCard(placeInput, urlInput, "#card"));
-    api.saveNewCard(placeInput, urlInput)
+    cardsList.addItemToTop(createCard(placeInput, urlInput, "#card", [], user));
+    api.saveNewCard(placeInput, urlInput, []);
   }
 );
 popupAddCard.setEventListeners();

@@ -15,13 +15,14 @@ export default class Api {
     });
   }
 
-  saveNewCard(nameInput, linkInput) {
+  saveNewCard(nameInput, linkInput, likes) {
     fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: nameInput,
         link: linkInput,
+        likes: likes
     })
   })}
 
@@ -46,4 +47,9 @@ export default class Api {
       }),
     });
   }
+
+  // saveLikes (card, count) {
+
+
+  // }
 }
