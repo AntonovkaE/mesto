@@ -33,6 +33,8 @@ export class Card {
     this._card.src = this._link;
     this._card.alt = this._name;
     this._element.querySelector(".card__title").textContent = this._name;
+    this._element.querySelector(".card__like-counter").textContent = this._likes.length;
+    console.log(this._likes.length)
     this._setEventListener();
     return this._element;
   }
@@ -51,17 +53,22 @@ export class Card {
   _handleLike() {
     this._likeCount = this._element.querySelector(".card__like-counter");
     this._likeButton.classList.toggle("card__button_like_active");
-    this._api.addLike(this._id)
-    // setTimeout(() => {
-    //   this._likeButton.classList.remove("card__button_like_active");
-    // }, 1000);
-    // this._likes.push(this._user.getUserInfo().name);
-    // this._api.getLikeCount(this._id)
-    // this._likeCount.textContent = this._api.getLikeCount(this._id)
-    // api.getUserData().then((result) => {
-  // userName.textContent = result.name;
-  // description.textContent = result.about;
-  }
+    if (this._likeButton.classList.contains("card__button_like_active")) {
+      this._api.addLike(this._id)
+          .then((res) => {
+              this._likeCount.textContent = res.likes.length
+              console.log(res)
+            })
+    }
+
+    else {
+      this._api.deleteLike(this._id)
+          .then((res) => {
+            this._likeCount.textContent = res.likes.length;
+            console.log(res)
+          })
+
+  }}
 
   _handleDelete() {
     this._api

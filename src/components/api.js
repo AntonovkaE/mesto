@@ -61,15 +61,25 @@ export default class Api {
     });
   }
 
+
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
-      body: JSON.stringify({
-        user: this.getUserData(),
-      }),
-    });
-  }
+    })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject("Произошла ошибка");
+        })
+        // .then((res) => { if(res.likes.includes(this.getUserData())) {
+        //   this.deleteLike(id).then((re) => console.log(re))
+        // }
+        // return res
+        // })
+        }
+
 
   deleteLike(id) {
     return fetch(this._baseUrl + /cards/ + id + "/likes", {
@@ -82,8 +92,7 @@ export default class Api {
 
       return Promise.reject("Произошла ошибка")
 
-    })
-        .then((res) => console.log(res));}
+    })}
 
 
   //  getLikeCount(id) {
