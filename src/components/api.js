@@ -75,22 +75,34 @@ export default class Api {
     return fetch(this._baseUrl + /cards/ + id + "/likes", {
       method: "DELETE",
       headers: this._headers,
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject("Произошла ошибка");
-  });
-}
-//  getLikeCount(id) {
-//   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-//     headers: this._headers,
-//   }).then((res) => {
-//     if (res.ok) {
-//       return res.json();
-//     }
-//     return Promise.reject(`Ошибка: ${res.status}`);
-//   });
-// }
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
 
+      return Promise.reject("Произошла ошибка")
+
+    })
+        .then((res) => console.log(res));}
+
+
+  //  getLikeCount(id) {
+  //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  //     headers: this._headers,
+  //   }).then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     }
+  //     return Promise.reject(`Ошибка: ${res.status}`);
+  //   });
+  // }
+  changeAvatar(linkInput) {
+    fetch(this._baseUrl + "/users/me/avatar", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: linkInput,
+      }),
+    });
+  }
 }

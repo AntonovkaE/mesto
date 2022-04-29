@@ -11,6 +11,7 @@ import {
   selectorCardList,
   popupConfig,
   userAvatar,
+  buttonChangeAvatar
 } from "../utils/constants.js";
 
 import Section from "../components/Section.js";
@@ -23,7 +24,7 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import { Card } from "../components/Card.js";
 import "../pages/index.css";
-const { addCardSelector, editFormSelector, openImageSelector, deleteCardSelector } = popupConfig;
+const { addCardSelector, editFormSelector, openImageSelector, deleteCardSelector, changeAvatarSelector } = popupConfig;
 
 const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
@@ -127,6 +128,15 @@ const popupDeleteCard = new PopupWithForm(
 )
 popupDeleteCard.setEventListeners();
 
+const popupChangeAvatar = new PopupWithForm(
+  changeAvatarSelector,
+  ({avatarInput}) => {
+    api.changeAvatar(avatarInput)
+  }
+);
+popupChangeAvatar.setEventListeners();
+
+
 buttonTypeEdit.addEventListener("click", () => {
   inputName.value = userName.textContent;
   inputDescription.value = description.textContent;
@@ -140,3 +150,8 @@ buttonAddCard.addEventListener("click", () => {
   addCardFormValidator.resetErrors();
   addCardFormValidator.toggleButtonState();
 });
+
+
+buttonChangeAvatar.addEventListener("click", () =>{
+  popupChangeAvatar.open()
+}) 

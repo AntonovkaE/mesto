@@ -34,7 +34,7 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
+const buttonChangeAvatar = document.querySelector(".profile__button_type_change-avatar");
 const buttonTypeEdit = document.querySelector(".profile__button_type_edit");
 const buttonAddCard = document.querySelector(".profile__button_type_add");
 
@@ -80,7 +80,8 @@ const popupConfig = {
   addCardSelector: ".popup_addCard",
   editFormSelector: ".popup_editForm",
   openImageSelector: ".popup_openImage",
-  deleteCardSelector: ".popup_deleteCard"
+  deleteCardSelector: ".popup_deleteCard",
+  changeAvatarSelector: ".popup_changeAvatar"
 }
 
 export {
@@ -110,5 +111,6 @@ export {
   popups,
   selectorCardList,
   popupConfig,
-  userAvatar
+  userAvatar,
+  buttonChangeAvatar
 };

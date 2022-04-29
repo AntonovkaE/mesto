@@ -20,9 +20,11 @@
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__icon/_type/profile__icon_type_add.css);
 @import url(../blocks/profile/__icon/_type/profile__icon_type_edit.css);
+@import url(../blocks/profile/__button/_type/profile__button_type_change-avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name-block/profile__name-block.css);
 @import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__icon/_type/profile__icon_type_edit-avatar.css);
 
 @import url(../blocks/gallery/gallery.css);
 

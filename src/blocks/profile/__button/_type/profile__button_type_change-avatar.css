@@ -1,0 +1,9 @@
+.profile__button_type_change-avatar {
+  border: none;
+  width: 120px;
+  height: 120px;
+}
+
+.profile__button_type_change-avatar:hover {
+  opacity: 1;
+}

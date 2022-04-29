@@ -18,11 +18,16 @@
       </header>
       <main class="page__main">
         <section class="profile">
-          <img
-            src="<%=require('./img/image.jpg')%>"
+          <button class="button profile__button profile__button_type_change-avatar">
+            <img src="<%=require('./img/editProfile.svg')%>"
+            class="profile__icon profile__icon_type_edit-avatar">
+            <img
+            src=""
             alt="фото пользователя"
             class="profile__avatar"
           />
+          
+          </button>
           <div class="profile__info">
             <div class="profile__name-block">
               <h1 class="profile__name"></h1>
@@ -34,7 +39,7 @@
                 />
               </button>
             </div>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
           <button class="button profile__button profile__button_type_add">
             <img
@@ -200,7 +205,11 @@
           </button>
           <div class="popup__content">
             <h2 class="popup__heading">Вы уверены?</h2>
-            <form class="popup__form form form_deleteCard" name="deleteCardForm" novalidate>
+            <form
+              class="popup__form form form_deleteCard"
+              name="deleteCardForm"
+              novalidate
+            >
               <button
                 type="submit"
                 class="button form__submit"
@@ -208,6 +217,48 @@
                 name="formSubmit"
               >
                 Да
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="popup popup_changeAvatar close-area" visibility="hidden">
+        <div class="popup__container">
+          <button
+            type="button"
+            class="button popup__button popup__button_type_close close-area"
+            data-bs-dismiss="form_edit"
+            aria-label="Close"
+            data-close=""
+          >
+            <img
+              class="popup__icon popup__icon_type_close close-area"
+              src="<%=require('./img/CloseIcon.svg')%>"
+              alt="крестик"
+            />
+          </button>
+          <div class="popup__content">
+            <h2 class="popup__heading">Обновить аватар</h2>
+            <form class="popup__form form form_add" name="addForm" novalidate>
+              <label for="place-input" class="form__label">
+                <input
+                  type="url"
+                  name="avatarInput"
+                  id="avatar-input"
+                  class="form__item form__item_el_avatar"
+                  placeholder="Ссылка на аватар"
+                  minlength="2"
+                  required
+                />
+                <span class="form__item-error avatar-input-error"></span>
+              </label>
+              <button
+                type="submit"
+                class="button form__submit"
+                aria-label="Создать"
+                name="formSubmit"
+              >
+                Сохранить
               </button>
             </form>
           </div>
@@ -225,11 +276,8 @@
           <h2 class="card__title"></h2>
           <div class="card__like-area">
             <button class="card__button card__button_like"></button>
-            <p class="card__like-counter">
-              
-            </p>
+            <p class="card__like-counter"></p>
           </div>
-          
         </div>
       </li>
     </template>
