@@ -84,6 +84,8 @@ const popupConfig = {
   changeAvatarSelector: ".popup_changeAvatar"
 }
 
+let userId
+
 export {
   validatorSetting,
   initialCards,
@@ -112,5 +114,6 @@ export {
   selectorCardList,
   popupConfig,
   userAvatar,
-  buttonChangeAvatar
+  buttonChangeAvatar,
+  userId
 };

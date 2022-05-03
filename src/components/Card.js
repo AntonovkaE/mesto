@@ -1,3 +1,5 @@
+import { userId } from "../pages/index.js";
+
 export class Card {
   constructor(
     card,
@@ -13,10 +15,10 @@ export class Card {
     this._templateSelector = templateSelector;
     this._likes = card.likes;
     this._id = card.id;
-    this._user = user;
     this._api = api;
+    this._user = this._api.getUserData();
     this._handleCardClick = handleCardClick;
-    this._handleCardDelete = handleCardDelete;
+    this._owner = card.owner;
   }
 
   _getTemplate() {
@@ -33,8 +35,31 @@ export class Card {
     this._card.src = this._link;
     this._card.alt = this._name;
     this._element.querySelector(".card__title").textContent = this._name;
-    this._element.querySelector(".card__like-counter").textContent = this._likes.length;
-    console.log(this._likes.length)
+    if (this._likes.length > 0) {
+      this._element.querySelector(".card__like-counter").textContent =
+      this._likes.length;
+    }
+    
+    function isLiked(elem) {
+      return elem._id == userId;
+    }
+
+    if (this._likes.some(isLiked)) {
+      this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
+    }
+    this._user
+      .then((res) => {
+        this._owner = this._owner ? this._owner : res._id;
+        return res;
+      })
+      .then((res) => {
+        if (res._id == this._owner) {
+          this._element
+            .querySelector(".card__button_delete")
+            .classList.remove("hidden");
+        }
+      });
+
     this._setEventListener();
     return this._element;
   }
@@ -52,23 +77,41 @@ export class Card {
 
   _handleLike() {
     this._likeCount = this._element.querySelector(".card__like-counter");
+    // проверим лайкнул ли юзер карточку
+    // function isLiked(elem) {
+    //   return elem._id == userId;
+    // }
+    // this._api.addLike(this._id).then((res) => {
+    //   if (res.likes.some(isLiked)) {
+    //     this._likeCount.textContent = res.likes.length;
+    //     this._likeButton.classList.add("card__button_like_active");
+    //     console.log(res)
+    //   }
+    //   else {
+    //     this._api.deleteLike(this._id).then((res) => {
+    //     this._likeCount.textContent = res.likes.length;
+    //     console.log(res);
+    //   });
+    //   }
+    // });
+    // this._api.addLike(this._id).then((res) => {
+    //   this._likeCount.textContent = res.likes.length;
+    // });
     this._likeButton.classList.toggle("card__button_like_active");
     if (this._likeButton.classList.contains("card__button_like_active")) {
-      this._api.addLike(this._id)
-          .then((res) => {
-              this._likeCount.textContent = res.likes.length
-              console.log(res)
-            })
+      this._api.addLike(this._id).then((res) => {
+        this._likeCount.textContent = res.likes.length;
+      });
+    } else {
+      this._api.deleteLike(this._id).then((res) => {
+        this._likeCount.textContent = res.likes.length;
+        if (res.likes.length == 0) {
+          this._likeCount.classList.add('hidden')
+        }
+      });
+      // }
     }
-
-    else {
-      this._api.deleteLike(this._id)
-          .then((res) => {
-            this._likeCount.textContent = res.likes.length;
-            console.log(res)
-          })
-
-  }}
+  }
 
   _handleDelete() {
     this._api

@@ -16,7 +16,7 @@ export default class Api {
   }
 
   saveNewCard(nameInput, linkInput, likes) {
-    fetch(this._baseUrl + "/cards", {
+    return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -24,7 +24,13 @@ export default class Api {
         link: linkInput,
         likes: likes,
       }),
-    });
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
   }
 
   getUserData() {
@@ -37,6 +43,18 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  getUserId() {
+    return fetch(this._baseUrl + "/users/me", {
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
 
   saveUserData(nameInput, descriptionInput) {
     fetch(this._baseUrl + "/users/me", {

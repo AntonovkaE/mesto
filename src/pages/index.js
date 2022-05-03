@@ -11,7 +11,8 @@ import {
   selectorCardList,
   popupConfig,
   userAvatar,
-  buttonChangeAvatar
+  buttonChangeAvatar,
+  
 } from "../utils/constants.js";
 
 import Section from "../components/Section.js";
@@ -37,13 +38,15 @@ const api = new Api({
   },
 });
 
+let userId;
+
 // console.log(api)
 
 let cardsList;
 api
   .getInitialCards()
   .then((result) => {
-    const initialCards = result.map((item) => ({ name: item.name, link: item.link, likes: item.likes, id: item._id})
+    const initialCards = result.map((item) => ({ name: item.name, link: item.link, likes: item.likes, id: item._id, owner: item.owner._id})
   )
     cardsList = new Section(
       {
@@ -66,6 +69,7 @@ api.getUserData().then((result) => {
   userName.textContent = result.name;
   description.textContent = result.about;
   userAvatar.src = result.avatar;
+  userId = result._id;
 });
 
 // fetch("https://mesto.nomoreparties.co/v1/cohort-40/cards", {
@@ -102,7 +106,7 @@ const popupOpenImage = new PopupWithImage(openImageSelector);
 popupOpenImage.setEventListeners();
 
 
-const user = new UserInfo(".profile__name", ".profile__description", api);
+const user = new UserInfo(".profile__name", ".profile__description", api, userId);
 
 const popupEditForm = new PopupWithForm(editFormSelector, (formData) => {
   user.setUserInfo(formData);
@@ -112,9 +116,12 @@ popupEditForm.setEventListeners();
 const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
-    cardsList.addItemToTop(createCard({name: placeInput, link: urlInput, likes: []}, "#card", user, api));
+    
 
-    api.saveNewCard(placeInput, urlInput, []);
+    api.saveNewCard(placeInput, urlInput, [])
+    .then((res) => {
+      cardsList.addItemToTop(createCard({name: placeInput, link: urlInput, likes: res.likes, id: res._id}, "#card", user, api));
+    });
   }
 );
 popupAddCard.setEventListeners();
@@ -155,3 +162,5 @@ buttonAddCard.addEventListener("click", () => {
 buttonChangeAvatar.addEventListener("click", () =>{
   popupChangeAvatar.open()
 }) 
+
+export {userId}
