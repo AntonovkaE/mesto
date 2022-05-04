@@ -66,6 +66,7 @@ const inputCardTitle = popupAddCard.querySelector(".form__item_el_name");
 const inputCardLink = popupAddCard.querySelector(".form__item_el_url");
 
 const popupEditForm = document.querySelector(".popup_editForm");
+const popupEditProfileSubmit = popupEditForm.querySelector(".form__submit")
 const inputName = popupEditForm.querySelector(".form__item_el_name");
 const inputDescription = popupEditForm.querySelector(
   ".form__item_el_description"
@@ -113,6 +114,7 @@ export {
   inputDescription,
   buttonCloseEditForm,
   formEditProfile,
+  popupEditProfileSubmit,
   popups,
   selectorCardList,
   popupConfig,

@@ -15,12 +15,12 @@ export default class UserInfo {
   setUserInfo({nameInput, descriptionInput}) {
     this._name.textContent = nameInput;
     this._description.textContent = descriptionInput;
-    this._api.saveUserData(nameInput, descriptionInput)
+    // this._api.saveUserData(nameInput, descriptionInput)
   }
 
 
   // saveUserInfo({nameInput, descriptionInput}) {
-  //   this._api.saveUserData({nameInput, descriptionInput})
-  //   .then((data) => console.log(data))
+  //   this._api.saveUserData(nameInput, descriptionInput)
+  
   // }
 }

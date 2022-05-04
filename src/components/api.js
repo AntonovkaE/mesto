@@ -41,7 +41,7 @@ export default class Api {
     });
   }
 
-  saveUserData(nameInput, descriptionInput) {
+  saveUserData(nameInput, descriptionInput, popup, submit) {
     fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
@@ -49,16 +49,38 @@ export default class Api {
         name: nameInput,
         about: descriptionInput,
       }),
-    });
+    })
+      .then((res) => {
+        return checkPromise(res);
+      })
+      .then((res) => {
+        submit.textContent = "Сохранение...";
+        return res;
+      })
+      .then((res) => {
+        popup.close();
+        return res;
+      });
+    // .then((res) => {submit.textContent = "Сохранить"})
   }
 
-  deleteCard(id) {
+  deleteCard(id, popup, submit) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      return checkPromise(res);
-    });
+    })
+      .then((res) => {
+        return checkPromise(res);
+      })
+      .then((res) => {
+        submit.textContent = "Сохранение...";
+        return res;
+      })
+      .then(res => {
+        console.log(popup)
+        popup.close();
+        return res
+      })
   }
 
   addLike(id) {

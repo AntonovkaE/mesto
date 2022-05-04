@@ -14,6 +14,7 @@ import {
   addAvatarForm,
   userAvatar,
   buttonChangeAvatar,
+  popupEditProfileSubmit
 } from "../utils/constants.js";
 
 import Section from "../components/Section.js";
@@ -122,6 +123,7 @@ const user = new UserInfo(
 
 const popupEditForm = new PopupWithForm(editFormSelector, (formData) => {
   user.setUserInfo(formData);
+  api.saveUserData(formData.nameInput, formData.descriptionInput, popupEditForm, popupEditProfileSubmit)
 });
 popupEditForm.setEventListeners();
 
@@ -129,10 +131,10 @@ const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
     api.saveNewCard(placeInput, urlInput, [])
-    .then((res) => {
-      addCardPopupSubmitButton.textContent = "Сохранение...";
-      return res
-    })
+    .then((res) => {addCardPopupSubmitButton.textContent = "Сохранение...";
+  return res} 
+    )
+
     .then((res) => {
       cardsList.addItemToTop(
         createCard(
@@ -144,6 +146,14 @@ const popupAddCard = new PopupWithForm(
       );
       return res
     })
+    .then((res) => {popupAddCard.close() 
+    return res})
+  //   .then((res) => {addCardPopupSubmitButton.textContent = "Создать";
+  // return res})
+    // .then((res) => {
+    //   addCardPopupSubmitButton.textContent = "Сохранить";
+    //   return res
+    // })
 
   }
 );
@@ -166,10 +176,13 @@ buttonTypeEdit.addEventListener("click", () => {
   inputDescription.value = description.textContent;
   editFormValidator.resetErrors();
   editFormValidator.toggleButtonState();
+
   popupEditForm.open();
+  popupEditProfileSubmit.textContent = "Сохранить"
 });
 
 buttonAddCard.addEventListener("click", () => {
+  addCardPopupSubmitButton.textContent="Создать";
   popupAddCard.open();
   addCardFormValidator.resetErrors();
   addCardFormValidator.toggleButtonState();
