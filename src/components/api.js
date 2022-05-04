@@ -1,3 +1,10 @@
+function checkPromise(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 export default class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -8,10 +15,11 @@ export default class Api {
     return fetch(this._baseUrl + "/cards", {
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return checkPromise(res);
+      // if (res.ok) {
+      //   return res.json();
+      // }
+      // return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
 
@@ -24,23 +32,16 @@ export default class Api {
         link: linkInput,
         likes: likes,
       }),
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then((res) => {
+      return checkPromise(res);
+    });
   }
 
   getUserData() {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return checkPromise(res);
     });
   }
 
@@ -48,13 +49,9 @@ export default class Api {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return checkPromise(res);
     });
   }
-
 
   saveUserData(nameInput, descriptionInput) {
     fetch(this._baseUrl + "/users/me", {
@@ -72,46 +69,32 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject("Произошла ошибка");
+      return checkPromise(res);
     });
   }
-
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject("Произошла ошибка");
-        })
-        // .then((res) => { if(res.likes.includes(this.getUserData())) {
-        //   this.deleteLike(id).then((re) => console.log(re))
-        // }
-        // return res
-        // })
-        }
-
+    }).then((res) => {
+      return checkPromise(res);
+    });
+    // .then((res) => { if(res.likes.includes(this.getUserData())) {
+    //   this.deleteLike(id).then((re) => console.log(re))
+    // }
+    // return res
+    // })
+  }
 
   deleteLike(id) {
     return fetch(this._baseUrl + /cards/ + id + "/likes", {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject("Произошла ошибка")
-
-    })}
-
+      return checkPromise(res);
+    });
+  }
 
   //  getLikeCount(id) {
   //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
