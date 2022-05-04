@@ -60,6 +60,7 @@ const popupAddCard = document.querySelector(".popup_addCard");
 const buttonClosePopupAddCard = popupAddCard.querySelector(
   ".popup__button_type_close"
 );
+const addCardPopupSubmitButton = popupAddCard.querySelector(".form__submit")
 const formAddCard = popupAddCard.querySelector(".form");
 const inputCardTitle = popupAddCard.querySelector(".form__item_el_name");
 const inputCardLink = popupAddCard.querySelector(".form__item_el_url");
@@ -84,7 +85,8 @@ const popupConfig = {
   changeAvatarSelector: ".popup_changeAvatar"
 }
 
-let userId
+let userId;
+const addAvatarForm = document.querySelector(".popup_changeAvatar")
 
 export {
   validatorSetting,
@@ -102,6 +104,7 @@ export {
   popupCaption,
   popupAddCard,
   buttonClosePopupAddCard,
+  addCardPopupSubmitButton,
   formAddCard,
   inputCardTitle,
   inputCardLink,
@@ -115,5 +118,6 @@ export {
   popupConfig,
   userAvatar,
   buttonChangeAvatar,
-  userId
+  userId,
+  addAvatarForm
 };

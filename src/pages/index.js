@@ -2,6 +2,7 @@ import {
   validatorSetting,
   buttonTypeEdit,
   buttonAddCard,
+  addCardPopupSubmitButton,
   userName,
   description,
   formAddCard,
@@ -10,6 +11,7 @@ import {
   formEditProfile,
   selectorCardList,
   popupConfig,
+  addAvatarForm,
   userAvatar,
   buttonChangeAvatar,
 } from "../utils/constants.js";
@@ -35,6 +37,7 @@ const {
 
 const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
+const addAvatarValidator = new FormValidator(validatorSetting, addAvatarForm)
 
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-40",
@@ -105,6 +108,7 @@ function createCard(cardData, selector, user) {
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+addAvatarValidator.enableValidation();
 
 const popupOpenImage = new PopupWithImage(openImageSelector);
 popupOpenImage.setEventListeners();
@@ -124,7 +128,12 @@ popupEditForm.setEventListeners();
 const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
-    api.saveNewCard(placeInput, urlInput, []).then((res) => {
+    api.saveNewCard(placeInput, urlInput, [])
+    .then((res) => {
+      addCardPopupSubmitButton.textContent = "Сохранение...";
+      return res
+    })
+    .then((res) => {
       cardsList.addItemToTop(
         createCard(
           { name: placeInput, link: urlInput, likes: res.likes, id: res._id },
@@ -133,7 +142,9 @@ const popupAddCard = new PopupWithForm(
           api
         )
       );
-    });
+      return res
+    })
+
   }
 );
 popupAddCard.setEventListeners();
@@ -145,7 +156,6 @@ const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput);
-    console.log(userAvatar, avatarInput)
     userAvatar.src = avatarInput
   }
 );
@@ -166,7 +176,10 @@ buttonAddCard.addEventListener("click", () => {
 });
 
 buttonChangeAvatar.addEventListener("click", () => {
+  addAvatarValidator.resetErrors();
+  addAvatarValidator.toggleButtonState();
   popupChangeAvatar.open();
+
 });
 
 export { userId };
