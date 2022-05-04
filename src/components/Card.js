@@ -19,6 +19,7 @@ export class Card {
     this._user = this._api.getUserData();
     this._handleCardClick = handleCardClick;
     this._owner = card.owner;
+    this._handleCardDelete = handleCardDelete;
   }
 
   _getTemplate() {
@@ -69,7 +70,7 @@ export class Card {
     this._likeButton.addEventListener("click", () => this._handleLike());
     this._element
       .querySelector(".card__button_delete")
-      .addEventListener("click", () => this._handleDelete(this._element));
+      .addEventListener("click", () => this._handleCardDelete(this._id));
     this._element.querySelector(".card__img").addEventListener("click", () => {
       this._handleCardClick();
     });
