@@ -78,26 +78,6 @@ export class Card {
 
   _handleLike() {
     this._likeCount = this._element.querySelector(".card__like-counter");
-    // проверим лайкнул ли юзер карточку
-    // function isLiked(elem) {
-    //   return elem._id == userId;
-    // }
-    // this._api.addLike(this._id).then((res) => {
-    //   if (res.likes.some(isLiked)) {
-    //     this._likeCount.textContent = res.likes.length;
-    //     this._likeButton.classList.add("card__button_like_active");
-    //     console.log(res)
-    //   }
-    //   else {
-    //     this._api.deleteLike(this._id).then((res) => {
-    //     this._likeCount.textContent = res.likes.length;
-    //     console.log(res);
-    //   });
-    //   }
-    // });
-    // this._api.addLike(this._id).then((res) => {
-    //   this._likeCount.textContent = res.likes.length;
-    // });
     this._likeButton.classList.toggle("card__button_like_active");
     if (this._likeButton.classList.contains("card__button_like_active")) {
       this._api.addLike(this._id).then((res) => {
@@ -122,7 +102,5 @@ export class Card {
         this._element = null;
       })
       .catch((err) => console.log(err));
-    // this._element.remove();
-    //
   }
 }

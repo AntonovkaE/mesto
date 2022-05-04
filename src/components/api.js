@@ -16,10 +16,6 @@ export default class Api {
       headers: this._headers,
     }).then((res) => {
       return checkPromise(res);
-      // if (res.ok) {
-      //   return res.json();
-      // }
-      // return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
 
@@ -38,14 +34,6 @@ export default class Api {
   }
 
   getUserData() {
-    return fetch(this._baseUrl + "/users/me", {
-      headers: this._headers,
-    }).then((res) => {
-      return checkPromise(res);
-    });
-  }
-
-  getUserId() {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
     }).then((res) => {
@@ -80,11 +68,6 @@ export default class Api {
     }).then((res) => {
       return checkPromise(res);
     });
-    // .then((res) => { if(res.likes.includes(this.getUserData())) {
-    //   this.deleteLike(id).then((re) => console.log(re))
-    // }
-    // return res
-    // })
   }
 
   deleteLike(id) {
@@ -96,16 +79,6 @@ export default class Api {
     });
   }
 
-  //  getLikeCount(id) {
-  //   return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-  //     headers: this._headers,
-  //   }).then((res) => {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
-  //     return Promise.reject(`Ошибка: ${res.status}`);
-  //   });
-  // }
   changeAvatar(linkInput) {
     fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",

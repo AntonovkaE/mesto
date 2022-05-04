@@ -46,7 +46,7 @@ const api = new Api({
 
 let userId;
 
-// console.log(api)
+
 
 let cardsList;
 api
@@ -71,7 +71,7 @@ api
     cardsList.renderItems();
   })
   .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
+    console.log(err); 
   });
 
 api.getUserData().then((result) => {
@@ -81,25 +81,7 @@ api.getUserData().then((result) => {
   userId = result._id;
 });
 
-// fetch("https://mesto.nomoreparties.co/v1/cohort-40/cards", {
-//   headers: {
-//     authorization: "242a0c65-83ea-4aa5-aad5-7b82cd182540",
-//   },
-// })
-//   .then((res) => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
 
-// fetch('https://nomoreparties.co/v1/cohort-40/users/me', {
-//       headers: {
-//         authorization: "242a0c65-83ea-4aa5-aad5-7b82cd182540",
-//       },
-//     })
-//     .then(res => res.json())
-//     .then((result) => {
-//       console.log(result);
-//     });
 
 function createCard(cardData, selector, user) {
   const card = new Card(
@@ -163,6 +145,8 @@ const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput);
+    console.log(userAvatar, avatarInput)
+    userAvatar.src = avatarInput
   }
 );
 popupChangeAvatar.setEventListeners();
