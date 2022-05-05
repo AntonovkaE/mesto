@@ -66,7 +66,6 @@ export class Card {
   }
 
   _setEventListener() {
-    console.log("вешаю слушателей на карточку")
     this._likeButton = this._element.querySelector(".card__button_like");
     this._likeButton.addEventListener("click", () => this._handleLike());
     this._element
@@ -99,7 +98,6 @@ export class Card {
   }
 
   _handleDelete(submit, popup) {
-    // console.log("удаляю карточку из верстки")
     this._api
       .deleteCard(this._id, submit, popup)
       .then(() => {

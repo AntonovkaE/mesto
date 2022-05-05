@@ -86,7 +86,6 @@ const popupConfig = {
   changeAvatarSelector: ".popup_changeAvatar"
 }
 
-// const deletePopupSubmit = document.querySelector(".popup__deleteCard").querySelector(".form__submit")
 
 let userId;
 const addAvatarForm = document.querySelector(".popup_changeAvatar")

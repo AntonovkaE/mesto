@@ -61,7 +61,6 @@ export default class Api {
         popup.close();
         return res;
       });
-    // .then((res) => {submit.textContent = "Сохранить"})
   }
 
   deleteCard(id, submit, popup) {
@@ -77,7 +76,6 @@ export default class Api {
         return res;
       })
       .then(res => {
-        console.log(popup)
         popup.close();
         return res
       })

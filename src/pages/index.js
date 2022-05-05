@@ -100,9 +100,7 @@ function createCard(cardData, selector, user) {
       
     },
     (id) => {
-      // const popupDeleteCard = new PopupWithChoice(deleteCardSelector, api, card);
       popupDeleteCard.open(id);
-      // popupDeleteCard.setEventListeners();
       
     }
   );
@@ -153,13 +151,6 @@ const popupAddCard = new PopupWithForm(
     })
     .then((res) => {popupAddCard.close() 
     return res})
-  //   .then((res) => {addCardPopupSubmitButton.textContent = "Создать";
-  // return res})
-    // .then((res) => {
-    //   addCardPopupSubmitButton.textContent = "Сохранить";
-    //   return res
-    // })
-
   }
 );
 popupAddCard.setEventListeners();
@@ -172,7 +163,6 @@ const popupChangeAvatar = new PopupWithForm(
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput)
     .then((res) => {
-      console.log(changeAvatarSubmit)
       changeAvatarSubmit.textContent = "Сохранение...";
       return res
     })
