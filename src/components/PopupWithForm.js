@@ -31,6 +31,5 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._popup.querySelector("form").reset();
-    // this._buttonSubmit.textContent = "Сохранить"
   }
 }

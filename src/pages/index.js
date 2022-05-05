@@ -172,6 +172,7 @@ const popupChangeAvatar = new PopupWithForm(
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput)
     .then((res) => {
+      console.log(changeAvatarSubmit)
       changeAvatarSubmit.textContent = "Сохранение...";
       return res
     })

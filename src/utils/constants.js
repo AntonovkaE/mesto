@@ -90,7 +90,7 @@ const popupConfig = {
 
 let userId;
 const addAvatarForm = document.querySelector(".popup_changeAvatar")
-const changeAvatarSubmit = addAvatarForm.querySelector("form__submit")
+const changeAvatarSubmit = addAvatarForm.querySelector(".form__submit")
 
 export {
   validatorSetting,
