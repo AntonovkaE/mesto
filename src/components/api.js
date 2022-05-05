@@ -64,7 +64,7 @@ export default class Api {
     // .then((res) => {submit.textContent = "Сохранить"})
   }
 
-  deleteCard(id, popup, submit) {
+  deleteCard(id, submit, popup) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
@@ -102,7 +102,7 @@ export default class Api {
   }
 
   changeAvatar(linkInput) {
-    fetch(this._baseUrl + "/users/me/avatar", {
+    return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({

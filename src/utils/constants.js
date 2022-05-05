@@ -86,8 +86,11 @@ const popupConfig = {
   changeAvatarSelector: ".popup_changeAvatar"
 }
 
+// const deletePopupSubmit = document.querySelector(".popup__deleteCard").querySelector(".form__submit")
+
 let userId;
 const addAvatarForm = document.querySelector(".popup_changeAvatar")
+const changeAvatarSubmit = addAvatarForm.querySelector("form__submit")
 
 export {
   validatorSetting,
@@ -121,5 +124,6 @@ export {
   userAvatar,
   buttonChangeAvatar,
   userId,
-  addAvatarForm
+  addAvatarForm,
+  changeAvatarSubmit,
 };

@@ -66,11 +66,12 @@ export class Card {
   }
 
   _setEventListener() {
+    console.log("вешаю слушателей на карточку")
     this._likeButton = this._element.querySelector(".card__button_like");
     this._likeButton.addEventListener("click", () => this._handleLike());
     this._element
       .querySelector(".card__button_delete")
-      .addEventListener("click", () => this._handleCardDelete(this._id));
+      .addEventListener("click", () => this._handleCardDelete(this));
     this._element.querySelector(".card__img").addEventListener("click", () => {
       this._handleCardClick();
     });
@@ -82,6 +83,9 @@ export class Card {
     if (this._likeButton.classList.contains("card__button_like_active")) {
       this._api.addLike(this._id).then((res) => {
         this._likeCount.textContent = res.likes.length;
+        if (res.likes.length > 0) {
+          this._likeCount.classList.remove('hidden')
+        }
       });
     } else {
       this._api.deleteLike(this._id).then((res) => {
@@ -94,13 +98,14 @@ export class Card {
     }
   }
 
-  _handleDelete() {
-    // this._api
-    //   .deleteCard(this._id)
-    //   .then(() => {
+  _handleDelete(submit, popup) {
+    // console.log("удаляю карточку из верстки")
+    this._api
+      .deleteCard(this._id, submit, popup)
+      .then(() => {
         this._element.remove();
         this._element = null;
-      // })
-      // .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }
 }

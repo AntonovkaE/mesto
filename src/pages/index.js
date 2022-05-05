@@ -14,7 +14,8 @@ import {
   addAvatarForm,
   userAvatar,
   buttonChangeAvatar,
-  popupEditProfileSubmit
+  changeAvatarSubmit,
+  popupEditProfileSubmit,
 } from "../utils/constants.js";
 
 import Section from "../components/Section.js";
@@ -27,7 +28,7 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import { Card } from "../components/Card.js";
 import "../pages/index.css";
-import PopupWithChoice from "../components/PopupWithChoice.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
 const {
   addCardSelector,
   editFormSelector,
@@ -53,6 +54,7 @@ let userId;
 
 
 let cardsList;
+
 api
   .getInitialCards()
   .then((result) => {
@@ -97,15 +99,18 @@ function createCard(cardData, selector, user) {
       popupOpenImage.open(cardData.link, cardData.name);
       
     },
-    () => {
-      const popupDeleteCard = new PopupWithChoice(deleteCardSelector, api, card);
-      popupDeleteCard.open();
-      popupDeleteCard.setEventListeners();
+    (id) => {
+      // const popupDeleteCard = new PopupWithChoice(deleteCardSelector, api, card);
+      popupDeleteCard.open(id);
+      // popupDeleteCard.setEventListeners();
       
     }
   );
   return card.generateCard();
 }
+
+const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api);
+popupDeleteCard.setEventListeners();
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
@@ -165,7 +170,15 @@ popupAddCard.setEventListeners();
 const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
-    api.changeAvatar(avatarInput);
+    api.changeAvatar(avatarInput)
+    .then((res) => {
+      changeAvatarSubmit.textContent = "Сохранение...";
+      return res
+    })
+    .then((res) => {
+      popupChangeAvatar.close();
+      return res
+    })
     userAvatar.src = avatarInput
   }
 );
@@ -192,6 +205,7 @@ buttonChangeAvatar.addEventListener("click", () => {
   addAvatarValidator.resetErrors();
   addAvatarValidator.toggleButtonState();
   popupChangeAvatar.open();
+  changeAvatarSubmit.textContent="Сохранить"
 
 });
 
