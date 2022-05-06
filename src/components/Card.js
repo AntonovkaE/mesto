@@ -9,7 +9,6 @@ export class Card {
     handleCardClick,
     handleCardDelete
   ) {
-    this._cardData = card;
     this._name = card.name;
     this._link = card.link;
     this._templateSelector = templateSelector;
@@ -44,10 +43,10 @@ export class Card {
     function isLiked(elem) {
       return elem._id == userId;
     }
-
     if (this._likes.some(isLiked)) {
       this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
     }
+
     this._user
       .then((res) => {
         this._owner = this._owner ? this._owner : res._id;
@@ -93,7 +92,6 @@ export class Card {
           this._likeCount.classList.add('hidden')
         }
       });
-      // }
     }
   }
 

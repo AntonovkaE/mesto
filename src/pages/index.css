@@ -53,6 +53,7 @@
 @import url(../blocks/popup/__button/_type/popup__button_type_close.css);
 @import url(../blocks/popup/__content/content.css);
 @import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__heading/_deletePopup/popup__heading_deletePopup.css);
 @import url(../blocks/popup/__icon/_type/popup__icon_type_close.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__img/imagePopup__img.css);

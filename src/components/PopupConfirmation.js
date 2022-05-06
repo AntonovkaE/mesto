@@ -13,7 +13,6 @@ export default class PopupConfirmation extends Popup {
     this._card = card;
   }
 
-
   handleFormSubmit() {
     this._card._handleDelete(this._submit, this)
   }

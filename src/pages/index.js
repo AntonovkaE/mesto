@@ -180,7 +180,6 @@ buttonTypeEdit.addEventListener("click", () => {
   inputDescription.value = description.textContent;
   editFormValidator.resetErrors();
   editFormValidator.toggleButtonState();
-
   popupEditForm.open();
   popupEditProfileSubmit.textContent = "Сохранить"
 });
@@ -197,7 +196,6 @@ buttonChangeAvatar.addEventListener("click", () => {
   addAvatarValidator.toggleButtonState();
   popupChangeAvatar.open();
   changeAvatarSubmit.textContent="Сохранить"
-
 });
 
 export { userId };

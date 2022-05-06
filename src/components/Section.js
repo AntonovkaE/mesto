@@ -19,6 +19,5 @@ export default class Section {
     else {
       this._renderer(this._renderedItems)
     }
-    
   }
 }
