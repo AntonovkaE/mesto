@@ -176,7 +176,6 @@ buttonTypeEdit.addEventListener("click", () => {
   editFormValidator.resetErrors();
   editFormValidator.toggleButtonState();
   popupEditForm.open();
-  // popupEditProfileSubmit.textContent = "Сохранить"
 });
 
 buttonAddCard.addEventListener("click", () => {
