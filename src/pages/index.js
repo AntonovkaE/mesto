@@ -51,10 +51,7 @@ const api = new Api({
 
 let userId;
 
-
-
 let cardsList;
-
 api
   .getInitialCards()
   .then((result) => {
@@ -156,8 +153,6 @@ const popupAddCard = new PopupWithForm(
 popupAddCard.setEventListeners();
 
 
-
-
 const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
@@ -181,11 +176,10 @@ buttonTypeEdit.addEventListener("click", () => {
   editFormValidator.resetErrors();
   editFormValidator.toggleButtonState();
   popupEditForm.open();
-  popupEditProfileSubmit.textContent = "Сохранить"
+  // popupEditProfileSubmit.textContent = "Сохранить"
 });
 
 buttonAddCard.addEventListener("click", () => {
-  addCardPopupSubmitButton.textContent="Создать";
   popupAddCard.open();
   addCardFormValidator.resetErrors();
   addCardFormValidator.toggleButtonState();
@@ -195,7 +189,6 @@ buttonChangeAvatar.addEventListener("click", () => {
   addAvatarValidator.resetErrors();
   addAvatarValidator.toggleButtonState();
   popupChangeAvatar.open();
-  changeAvatarSubmit.textContent="Сохранить"
 });
 
 export { userId };
