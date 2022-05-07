@@ -4,8 +4,8 @@ export default class PopupWithForm extends Popup {
   constructor(selector, handleFormSubmit) {
     super(selector);
     this._handleFormSubmit = handleFormSubmit;
-    this._buttonSubmit = this._popup.querySelector(".form__submit")
-    this._initialValueSubmit = this._buttonSubmit.textContent
+    this._submitButton = this._popup.querySelector(".form__submit");
+    this._initialValueSubmit = this._submitButton.textContent
   }
 
   _getInputValues() {
@@ -21,16 +21,34 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-    });
-  }
+      this.renderLoading(true)
+      this._handleFormSubmit(this._getInputValues())
+      //     .then(() => this.close())
+      //     .finally(() => {
+      //   this._submitButton.textContent = this._initialValueSubmit
+      // });
+    })}
+
   open() {
-    this._buttonSubmit.textContent = this._initialValueSubmit;
+    // this._submitButton.textContent = this._initialValueSubmit;
     super.open();
   }
 
   close() {
     super.close();
     this._popup.querySelector("form").reset();
+  }
+
+  renderLoading(isLoading, buttonText='Сохранить') {
+    if (isLoading) {
+      this._submitButton = buttonText;
+    }
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      input.value = data[input.name];
+    });
   }
 }

@@ -8,7 +8,8 @@ export default class UserInfo {
   getUserInfo() {
     return {
       name: this._name.textContent,
-      decription: this._description.textContent
+      decription: this._description.textContent,
+        userId: this._id
     };
   }
 

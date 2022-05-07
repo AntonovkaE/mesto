@@ -2,7 +2,6 @@ import {
   validatorSetting,
   buttonTypeEdit,
   buttonAddCard,
-  addCardPopupSubmitButton,
   userName,
   description,
   formAddCard,
@@ -14,7 +13,6 @@ import {
   addAvatarForm,
   userAvatar,
   buttonChangeAvatar,
-  changeAvatarSubmit,
   popupEditProfileSubmit,
 } from "../utils/constants.js";
 
@@ -50,6 +48,7 @@ const api = new Api({
 });
 
 let userId;
+let user;
 
 let cardsList;
 api
@@ -66,11 +65,25 @@ api
       {
         item: initialCards,
         renderer: (item) => {
-          cardsList.addItem(createCard(item, "#card", user, api));
+          const card = new Card(
+              item,
+              "#card",
+              user,
+              api,
+              () => {
+                popupOpenImage.open(item.link, item.name);
+
+              },
+              (id) => {
+                popupDeleteCard.open(id);
+              },
+          );
+          return card.generateCard();
         },
       },
       selectorCardList
     );
+    // cardsList.addItem();
     cardsList.renderItems();
   })
   .catch((err) => {
@@ -82,27 +95,33 @@ api.getUserData().then((result) => {
   description.textContent = result.about;
   userAvatar.src = result.avatar;
   userId = result._id;
-});
-
-
-
-function createCard(cardData, selector, user) {
-  const card = new Card(
-    cardData,
-    selector,
-    user,
-    api,
-    () => {
-      popupOpenImage.open(cardData.link, cardData.name);
-      
-    },
-    (id) => {
-      popupDeleteCard.open(id);
-      
-    }
+  return result
+}).then(res => {
+  user = new UserInfo(
+      ".profile__name",
+      ".profile__description",
+      api,
+      res._id
   );
-  return card.generateCard();
-}
+})
+
+// function createCard(cardData, selector, user) {
+//   const card = new Card(
+//     cardData,
+//     selector,
+//     user,
+//     api,
+//     () => {
+//       popupOpenImage.open(cardData.link, cardData.name);
+//
+//     },
+//     (id) => {
+//       popupDeleteCard.open(id);
+//
+//     },
+//   );
+//   return card.generateCard();
+// }
 
 const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api);
 popupDeleteCard.setEventListeners();
@@ -114,12 +133,7 @@ addAvatarValidator.enableValidation();
 const popupOpenImage = new PopupWithImage(openImageSelector);
 popupOpenImage.setEventListeners();
 
-const user = new UserInfo(
-  ".profile__name",
-  ".profile__description",
-  api,
-  userId
-);
+
 
 const popupEditForm = new PopupWithForm(editFormSelector, (formData) => {
   user.setUserInfo(formData);
@@ -131,18 +145,14 @@ const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
     api.saveNewCard(placeInput, urlInput, [])
-    .then((res) => {addCardPopupSubmitButton.textContent = "Сохранение...";
-  return res} 
-    )
-
+  //   .then((res) => {addCardPopupSubmitButton.textContent = "Сохранение...";
+  // return res}
+  //   )
     .then((res) => {
-      cardsList.addItemToTop(
-        createCard(
-          { name: placeInput, link: urlInput, likes: res.likes, id: res._id },
+      cardsList.addItemToTop(          { name: placeInput, link: urlInput, likes: res.likes, id: res._id},
           "#card",
           user,
-          api
-        )
+          api,
       );
       return res
     })
@@ -157,10 +167,10 @@ const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput)
-    .then((res) => {
-      changeAvatarSubmit.textContent = "Сохранение...";
-      return res
-    })
+    // .then((res) => {
+    //   changeAvatarSubmit.textContent = "Сохранение...";
+    //   return res
+    // })
     .then((res) => {
       popupChangeAvatar.close();
       return res
@@ -190,4 +200,4 @@ buttonChangeAvatar.addEventListener("click", () => {
   popupChangeAvatar.open();
 });
 
-export { userId };
+
