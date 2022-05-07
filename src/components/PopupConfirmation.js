@@ -4,28 +4,36 @@ export default class PopupConfirmation extends Popup {
 	constructor(selector, api) {
     super(selector);
     this._api = api;
-    this._submit = this._popup.querySelector(".form__submit");
+    this._submitButton = this._popup.querySelector(".form__submit");
+    this._initialValueSubmit = this._submitButton.textContent
 	 }
 
   open(card) {
-    this._submit.textContent = "Да";
+    // this._submitButton.textContent = "Да";
     super.open();
     this._card = card;
   }
 
   handleFormSubmit() {
-    this._card._handleDelete(this._submit, this)
+    this._card._handleDelete(this._submitButton, this)
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.handleFormSubmit();
+      this.renderLoading(true)
+      this.handleFormSubmit()
+          .then(() => this.close())
+          .finally(() => {
+            this._submitButton.textContent = this._initialValueSubmit
+          });
     });
   }
-
-  close() {
-    super.close()
+  renderLoading(isLoading, buttonText='Сохранить') {
+    if (isLoading) {
+      this._submit = buttonText;
+    }
   }
 }
+

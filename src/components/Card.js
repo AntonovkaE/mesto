@@ -1,5 +1,3 @@
-import { userId } from "../pages/index.js";
-
 export class Card {
   constructor(
     card,
@@ -7,7 +5,7 @@ export class Card {
     user,
     api,
     handleCardClick,
-    handleCardDelete
+    handleCardDelete,
   ) {
     this._name = card.name;
     this._link = card.link;
@@ -15,7 +13,8 @@ export class Card {
     this._likes = card.likes;
     this._id = card.id;
     this._api = api;
-    this._user = this._api.getUserData();
+    this._user = user;
+    this._userId = this._user._id;
     this._handleCardClick = handleCardClick;
     this._owner = card.owner;
     this._handleCardDelete = handleCardDelete;
@@ -39,26 +38,16 @@ export class Card {
       this._element.querySelector(".card__like-counter").textContent =
       this._likes.length;
     }
-    
-    function isLiked(elem) {
-      return elem._id == userId;
-    }
-    if (this._likes.some(isLiked)) {
+    if (this._likes.some(elem => elem._id == this._userId)) {
       this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
     }
-
-    this._user
-      .then((res) => {
-        this._owner = this._owner ? this._owner : res._id;
-        return res;
-      })
-      .then((res) => {
-        if (res._id == this._owner) {
-          this._element
-            .querySelector(".card__button_delete")
-            .classList.remove("hidden");
-        }
-      });
+    // не отображается корзинка на новой карточке до перезагрузки
+    if (this._userId !== this._owner) {
+      // console.log(this._userId, this._owner)
+            this._element
+              .querySelector(".card__button_delete")
+              .classList.add("hidden");
+          }
 
     this._setEventListener();
     return this._element;
@@ -77,14 +66,19 @@ export class Card {
 
   _handleLike() {
     this._likeCount = this._element.querySelector(".card__like-counter");
-    this._likeButton.classList.toggle("card__button_like_active");
     if (this._likeButton.classList.contains("card__button_like_active")) {
-      this._api.addLike(this._id).then((res) => {
+      this._api.addLike(this._id)
+          .then(res => {this._likeButton.classList.toggle("card__button_like_active");
+            return res
+          })
+          .then((res) => {
         this._likeCount.textContent = res.likes.length;
         if (res.likes.length > 0) {
           this._likeCount.classList.remove('hidden')
         }
-      });
+      }).catch((err) => {
+        console.log(err);
+      });;
     } else {
       this._api.deleteLike(this._id).then((res) => {
         this._likeCount.textContent = res.likes.length;
@@ -103,5 +97,9 @@ export class Card {
         this._element = null;
       })
       .catch((err) => console.log(err));
+  }
+
+  getId() {
+    return this._id
   }
 }
