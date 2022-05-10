@@ -1,21 +1,20 @@
-function checkPromise(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-}
-
 export default class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
+  }
+  _checkPromise(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getInitialCards() {
     return fetch(this._baseUrl + "/cards", {
       headers: this._headers,
     }).then((res) => {
-      return checkPromise(res);
+      return this._checkPromise(res);
     });
   }
 
@@ -29,7 +28,7 @@ export default class Api {
         likes: likes,
       }),
     }).then((res) => {
-      return checkPromise(res);
+      return this._checkPromise(res);
     });
   }
 
@@ -37,12 +36,12 @@ export default class Api {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers,
     }).then((res) => {
-      return checkPromise(res);
+      return this._checkPromise(res);
     });
   }
 
-  saveUserData(nameInput, descriptionInput, popup, submit) {
-    fetch(this._baseUrl + "/users/me", {
+  saveUserData(nameInput, descriptionInput) {
+    return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -51,33 +50,16 @@ export default class Api {
       }),
     })
       .then((res) => {
-        return checkPromise(res);
-      })
-      .then((res) => {
-        submit.textContent = "Сохранение...";
-        return res;
-      })
-      .then((res) => {
-        popup.close();
-        return res;
-      });
-  }
+        return this._checkPromise(res);
+      })}
 
-  deleteCard(id, submit, popup) {
+  deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     })
       .then((res) => {
-        return checkPromise(res);
-      })
-      .then((res) => {
-        submit.textContent = "Сохранение...";
-        return res;
-      })
-      .then(res => {
-        popup.close();
-        return res
+        return this._checkPromise(res);
       })
   }
 
@@ -86,7 +68,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
-      return checkPromise(res);
+      return this._checkPromise(res);
     });
   }
 
@@ -95,7 +77,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      return checkPromise(res);
+      return this._checkPromise(res);
     });
   }
 
@@ -106,6 +88,9 @@ export default class Api {
       body: JSON.stringify({
         avatar: linkInput,
       }),
-    });
+    })
+        .then((res) => {
+          return this._checkPromise(res);
+        });
   }
 }

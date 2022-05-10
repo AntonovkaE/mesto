@@ -20,7 +20,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo";
-import Api from "../components/api";
+import Api from "../components/Api";
 
 import { FormValidator } from "../components/FormValidator.js";
 
@@ -51,7 +51,9 @@ let userId;
 let user;
 
 let cardsList;
-api
+
+
+const getCards = api
   .getInitialCards()
   .then((result) => {
     const initialCards = result.map((item) => ({
@@ -89,21 +91,31 @@ api
   .catch((err) => {
     console.log(err); 
   });
-
-api.getUserData().then((result) => {
-  userName.textContent = result.name;
-  description.textContent = result.about;
-  userAvatar.src = result.avatar;
-  userId = result._id;
-  return result
+const getUserData = api.getUserData().
+    then(result => {
+    userName.textContent = result.name;
+    description.textContent = result.about;
+    userAvatar.src = result.avatar;
+    userId = result._id;
+    return result
 }).then(res => {
   user = new UserInfo(
       ".profile__name",
       ".profile__description",
-      api,
-      res._id
+      ".profile__avatar",
+      userId
   );
 })
+
+Promise.all([getUserData, getCards])
+    // тут деструктурируете ответs от сервера, чтобы было понятнее, что пришло
+    .then(([userData, cards]) => {
+        // тут установка данных пользователя
+        // и тут отрисовка карточек
+    })
+    .catch(err => {
+        console.log(err)
+    });
 
 // function createCard(cardData, selector, user) {
 //   const card = new Card(
@@ -125,6 +137,7 @@ api.getUserData().then((result) => {
 
 const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api);
 popupDeleteCard.setEventListeners();
+popupDeleteCard.setEventListeners();
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
@@ -135,31 +148,31 @@ popupOpenImage.setEventListeners();
 
 
 
-const popupEditForm = new PopupWithForm(editFormSelector, (formData) => {
-  user.setUserInfo(formData);
-  api.saveUserData(formData.nameInput, formData.descriptionInput, popupEditForm, popupEditProfileSubmit)
-});
+const popupEditForm = new PopupWithForm(editFormSelector,
+    ({nameInput, descriptionInput, avatar, _id}) => {
+        user.setUserInfo({nameInput, descriptionInput, avatar, _id});
+        return (api.saveUserData(nameInput, descriptionInput)
+           .then(res => {console.log(res)
+          return res}))
+})
 popupEditForm.setEventListeners();
 
 const popupAddCard = new PopupWithForm(
   addCardSelector,
   ({ placeInput, urlInput }) => {
-    api.saveNewCard(placeInput, urlInput, [])
-  //   .then((res) => {addCardPopupSubmitButton.textContent = "Сохранение...";
-  // return res}
-  //   )
+      return (api.saveNewCard(placeInput, urlInput, [])
     .then((res) => {
-      cardsList.addItemToTop(          { name: placeInput, link: urlInput, likes: res.likes, id: res._id},
+      cardsList.addItemToTop({ name: placeInput, link: urlInput, likes: res.likes, id: res._id},
           "#card",
           user,
           api,
       );
       return res
     })
-    .then((res) => {popupAddCard.close() 
-    return res})
+    .then((res) => {
+    return res}))
   }
-);
+)
 popupAddCard.setEventListeners();
 
 
@@ -167,15 +180,15 @@ const popupChangeAvatar = new PopupWithForm(
   changeAvatarSelector,
   ({ avatarInput }) => {
     api.changeAvatar(avatarInput)
-    // .then((res) => {
-    //   changeAvatarSubmit.textContent = "Сохранение...";
-    //   return res
-    // })
     .then((res) => {
       popupChangeAvatar.close();
       return res
     })
-    userAvatar.src = avatarInput
+        .then(res => {
+            console.log(res)
+            return res
+        })
+    // userAvatar.src = avatarInput
   }
 );
 popupChangeAvatar.setEventListeners();

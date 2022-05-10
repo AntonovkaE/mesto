@@ -78,7 +78,7 @@ export class Card {
         }
       }).catch((err) => {
         console.log(err);
-      });;
+      });
     } else {
       this._api.deleteLike(this._id).then((res) => {
         this._likeCount.textContent = res.likes.length;
@@ -90,13 +90,15 @@ export class Card {
   }
 
   _handleDelete(submit, popup) {
-    this._api
-      .deleteCard(this._id, submit, popup)
-      .then(() => {
-        this._element.remove();
-        this._element = null;
-      })
-      .catch((err) => console.log(err));
+    return (this._api
+        .deleteCard(this._id, submit, popup)
+        .then(() => {
+          // this._element = null;
+          //Обязательно ли делать равным нулем?
+          this._element.remove();
+
+        })
+        .catch((err) => console.log(err)))
   }
 
   getId() {
