@@ -1,8 +1,8 @@
 export default class UserInfo {
-	constructor(selectorName, selectorDescription, api, userId) {
+	constructor(selectorName, selectorDescription, selectorAvatar, userId) {
     this._name = document.querySelector(selectorName);
     this._description = document.querySelector(selectorDescription);
-    this._api = api;
+    this._avatar = document.querySelector(selectorAvatar);
     this._id = userId;
 	}
   getUserInfo() {
@@ -13,8 +13,14 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({nameInput, descriptionInput}) {
-    this._name.textContent = nameInput;
-    this._description.textContent = descriptionInput;
+  setUserInfo({name, about, avatar, _id}) {
+    this._name.textContent = name;
+    this._description.textContent = about;
+    this.setAvatar(avatar);
+    this._id = _id
+  }
+
+  setAvatar(avatar) {
+      this._avatar.src = avatar;
   }
 }

@@ -5,17 +5,16 @@ export default class PopupConfirmation extends Popup {
     super(selector);
     this._api = api;
     this._submitButton = this._popup.querySelector(".form__submit");
-    this._initialValueSubmit = this._submitButton.textContent
+    this._initialValueSubmit = this._submitButton.textContent;
 	 }
 
   open(card) {
-    // this._submitButton.textContent = "Да";
     super.open();
     this._card = card;
   }
 
   handleFormSubmit() {
-    this._card._handleDelete(this._submitButton, this)
+    return this._card._handleDelete(this._submitButton, this)
   }
 
   setEventListeners() {
@@ -25,14 +24,18 @@ export default class PopupConfirmation extends Popup {
       this.renderLoading(true)
       this.handleFormSubmit()
           .then(() => this.close())
+          .catch((err) => {
+              console.log(err);
+          })
           .finally(() => {
             this._submitButton.textContent = this._initialValueSubmit
           });
     });
   }
-  renderLoading(isLoading, buttonText='Сохранить') {
+
+  renderLoading(isLoading, buttonText='Сохранение...') {
     if (isLoading) {
-      this._submit = buttonText;
+      this._submitButton.textContent = buttonText;
     }
   }
 }
