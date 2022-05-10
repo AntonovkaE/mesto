@@ -38,15 +38,14 @@ export class Card {
         this._card.alt = this._name;
         this._element.querySelector(".card__title").textContent = this._name;
         if (this._likes.length > 0) {
-            this._element.querySelector(".card__like-counter").textContent =
+            this._likeCount.textContent =
                 this._likes.length;
         }
-        if (this._likes.some(elem => elem._id == this._userId)) {
-            this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
+        if (this._isLiked(this._likes)) {
+            this._likeButton.classList.add("card__button_like_active");
         }
         if (this._userId == this._owner || this._owner == undefined) {
-            this._element
-                .querySelector(".card__button_delete")
+            this.deleteButton
                 .classList.remove("hidden");
         }
 
@@ -62,21 +61,24 @@ export class Card {
         });
     }
 
+    _isLiked(likes) {
+        return likes.some(elem => elem._id == this._userId)
+    }
+
     _handleLike() {
-        if (this._likes.some(elem => elem._id == this._userId)) {
+        if (this._isLiked(this._likes)) {
+
             this._api.deleteLike(this._id)
                 .then(res => {
-                    console.log(this._likes)
                     this._likeButton.classList.toggle("card__button_like_active");
                     if (res.likes.length == 0) {
                         this._likeCount.classList.add('hidden')
                     }
                     this._likes = res.likes;
-                    console.log(this._likes)
                     this._likeCount.textContent = res.likes.length;
                 }).catch((err) => {
-                    console.log(err);
-                  });
+                console.log(err);
+            });
         } else {
             this._api.addLike(this._id)
                 .then(res => {
@@ -90,8 +92,8 @@ export class Card {
                     return res
                 })
                 .catch((err) => {
-                        console.log(err);
-                      });
+                    console.log(err);
+                });
         }
 
     }
