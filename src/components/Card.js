@@ -42,11 +42,11 @@ export class Card {
       this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
     }
     // не отображается корзинка на новой карточке до перезагрузки
-    if (this._userId !== this._owner) {
-      // console.log(this._userId, this._owner)
+    if (this._userId == this._owner || this._owner == undefined) {
+      console.log(this._userId, this._owner !== undefined)
             this._element
               .querySelector(".card__button_delete")
-              .classList.add("hidden");
+              .classList.remove("hidden");
           }
 
     this._setEventListener();
