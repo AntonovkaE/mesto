@@ -52,60 +52,6 @@ let userId;
 
 let cardsList;
 
-//
-// const getCards = api
-//   .getInitialCards()
-//   .then((result) => {
-//     const initialCards = result.map((item) => ({
-//       name: item.name,
-//       link: item.link,
-//       likes: item.likes,
-//       id: item._id,
-//       owner: item.owner._id,
-//     }));
-//     cardsList = new Section(
-//       {
-//         item: initialCards,
-//         renderer: (item) => {
-//           const card = new Card(
-//               item,
-//               "#card",
-//               user,
-//               api,
-//               () => {
-//                 popupOpenImage.open(item.link, item.name);
-//
-//               },
-//               (id) => {
-//                 popupDeleteCard.open(id);
-//               },
-//           );
-//           return card.generateCard();
-//         },
-//       },
-//       selectorCardList
-//     );
-//     // cardsList.addItem();
-//     cardsList.renderItems();
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-// const getUserData = api.getUserData().
-//     then(result => {
-//     userName.textContent = result.name;
-//     description.textContent = result.about;
-//     userAvatar.src = result.avatar;
-//     userId = result._id;
-//     return result
-// }).then(res => {
-//    = new UserInfo(
-//       ".profile__name",
-//       ".profile__description",
-//       ".profile__avatar",
-//       userId
-//   );
-// })
 
 Promise.all([api.getUserData(), api.getInitialCards()])
     .then(res => {
@@ -190,11 +136,12 @@ popupOpenImage.setEventListeners();
 
 
 const popupEditForm = new PopupWithForm(editFormSelector,
-    ({nameInput, descriptionInput, avatar, _id}) => {
-        user.setUserInfo({nameInput, descriptionInput, avatar, _id});
+    ({nameInput, descriptionInput}) => {
+        // user.setUserInfo({nameInput, descriptionInput});
         return (api.saveUserData(nameInput, descriptionInput)
             .then(res => {
-                console.log(res)
+                user.setUserInfo(res)
+                console.log('отпрвка', res)
                 return res
             }))
     })
@@ -223,16 +170,9 @@ popupAddCard.setEventListeners();
 const popupChangeAvatar = new PopupWithForm(
     changeAvatarSelector,
     ({avatarInput}) => {
-        api.changeAvatar(avatarInput)
-            .then((res) => {
-                popupChangeAvatar.close();
-                return res
-            })
-            .then(res => {
-                console.log(res)
-                return res
-            })
-        // userAvatar.src = avatarInput
+        user.setAvatar(avatarInput)
+        return api.changeAvatar(avatarInput)
+
     }
 );
 popupChangeAvatar.setEventListeners();
