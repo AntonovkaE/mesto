@@ -44,7 +44,6 @@ export class Card {
         if (this._likes.some(elem => elem._id == this._userId)) {
             this._element.querySelector(".card__button_like").classList.add("card__button_like_active");
         }
-        // не отображается корзинка на новой карточке до перезагрузки
         if (this._userId == this._owner || this._owner == undefined) {
             this._element
                 .querySelector(".card__button_delete")
@@ -67,12 +66,14 @@ export class Card {
         if (this._likes.some(elem => elem._id == this._userId)) {
             this._api.deleteLike(this._id)
                 .then(res => {
+                    console.log(this._likes)
                     this._likeButton.classList.toggle("card__button_like_active");
-                    this._likeCount.textContent = res.likes.length;
                     if (res.likes.length == 0) {
                         this._likeCount.classList.add('hidden')
                     }
                     this._likes = res.likes;
+                    console.log(this._likes)
+                    this._likeCount.textContent = res.likes.length;
                 }).catch((err) => {
                     console.log(err);
                   });
@@ -80,11 +81,12 @@ export class Card {
             this._api.addLike(this._id)
                 .then(res => {
                     this._likeButton.classList.toggle("card__button_like_active");
-                    this._likeCount.textContent = res.likes.length;
+
                     if (res.likes.length > 0) {
                         this._likeCount.classList.remove('hidden')
                     }
                     this._likes = res.likes;
+                    this._likeCount.textContent = res.likes.length;
                     return res
                 })
                 .catch((err) => {
@@ -92,29 +94,6 @@ export class Card {
                       });
         }
 
-        //
-        // console.log(this._likeCount)
-        // if (this._likeButton.classList.contains("card__button_like_active")) {
-        //   this._api.addLike(this._id)
-        //       .then(res => {this._likeButton.classList.toggle("card__button_like_active");
-        //         return res
-        //       })
-        //       .then((res) => {
-        //     this._likeCount.textContent = res.likes.length;
-        //     if (res.likes.length > 0) {
-        //       this._likeCount.classList.remove('hidden')
-        //     }
-        //   }).catch((err) => {
-        //     console.log(err);
-        //   });
-        // } else {
-        //   this._api.deleteLike(this._id).then((res) => {
-        //     this._likeCount.textContent = res.likes.length;
-        //     if (res.likes.length == 0) {
-        //       this._likeCount.classList.add('hidden')
-        //     }
-        //   });
-        // }
     }
 
     _handleDelete(submit, popup) {

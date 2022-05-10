@@ -26,6 +26,9 @@ export default class PopupConfirmation extends Popup {
       this.renderLoading(true)
       this.handleFormSubmit()
           .then(() => this.close())
+          .catch((err) => {
+              console.log(err);
+          })
           .finally(() => {
             this._submitButton.textContent = this._initialValueSubmit
           });

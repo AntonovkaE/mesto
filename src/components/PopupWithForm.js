@@ -25,13 +25,15 @@ export default class PopupWithForm extends Popup {
       this.renderLoading(true, 'Сохранение...')
       this._handleFormSubmit(this._getInputValues())
           .then(() => this.close())
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
         this._submitButton.textContent = initialValueSubmit
       });
     })}
 
   open() {
-    // this._submitButton.textContent = this._initialValueSubmit;
     super.open();
   }
 
