@@ -2,7 +2,7 @@ export class Card {
   constructor(
     card,
     templateSelector,
-    user,
+    userId,
     api,
     handleCardClick,
     handleCardDelete,
@@ -13,8 +13,7 @@ export class Card {
     this._likes = card.likes;
     this._id = card.id;
     this._api = api;
-    this._user = user;
-    this._userId = this._user._id;
+    this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._owner = card.owner;
     this._handleCardDelete = handleCardDelete;
@@ -43,7 +42,6 @@ export class Card {
     }
     // не отображается корзинка на новой карточке до перезагрузки
     if (this._userId == this._owner || this._owner == undefined) {
-      console.log(this._userId, this._owner !== undefined)
             this._element
               .querySelector(".card__button_delete")
               .classList.remove("hidden");
