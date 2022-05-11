@@ -56,10 +56,6 @@ let cardsList;
 
 
 Promise.all([api.getUserData(), api.getInitialCards()])
-    .then(res => {
-        let [userData, cards] = res;
-        return [userData, cards]
-    })
     .then(([userData, cards]) => {
         user.setUserInfo(userData)
         userId = userData._id;
@@ -141,9 +137,7 @@ const popupAddCard = new PopupWithForm(
                 );
                 return res
             })
-            .then((res) => {
-                return res
-            }))
+        )
     }
 )
 popupAddCard.setEventListeners();
