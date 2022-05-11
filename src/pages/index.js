@@ -156,8 +156,7 @@ const popupChangeAvatar = new PopupWithForm(
 popupChangeAvatar.setEventListeners();
 
 buttonTypeEdit.addEventListener("click", () => {
-    inputName.value = userName.textContent;
-    inputDescription.value = description.textContent;
+    popupEditForm.setInputValues(user.getUserInfo())
     editFormValidator.resetErrors();
     editFormValidator.toggleButtonState();
     popupEditForm.open();
