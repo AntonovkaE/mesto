@@ -23,20 +23,23 @@ export default class PopupConfirmation extends Popup {
     super.setEventListeners();
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.renderLoading(true)
+      this.renderLoading(true, "Удаление...")
       this.handleFormSubmit()
           .then(() => this.close())
           .catch((err) => {
               console.log(err);
           })
           .finally(() => {
-            this._submitButton.textContent = this._initialValueSubmit
+            this.renderLoading(false)
           });
     });
   }
   renderLoading(isLoading, buttonText='Сохранение...') {
     if (isLoading) {
       this._submitButton.textContent = buttonText;
+    }
+    else {
+        this._submitButton.textContent = this._initialValueSubmit
     }
   }
 }
