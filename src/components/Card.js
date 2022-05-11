@@ -99,16 +99,9 @@ export class Card {
 
     }
 
-    _handleDelete(submit, popup) {
-        return (this._api
-            .deleteCard(this._id, submit, popup)
-            .then(() => {
-                // this._element = null;
-                //Обязательно ли делать равным нулем?
+    handleDelete() {
                 this._element.remove();
-
-            })
-            .catch((err) => console.log(err)))
-    }
+                this._element = null;
+            }
 
 }

@@ -42,6 +42,7 @@ const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
 const addAvatarValidator = new FormValidator(validatorSetting, addAvatarForm)
 
+
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-40",
     headers: {
@@ -56,10 +57,6 @@ let cardsList;
 
 
 Promise.all([api.getUserData(), api.getInitialCards()])
-    .then(res => {
-        let [userData, cards] = res;
-        return [userData, cards]
-    })
     .then(([userData, cards]) => {
         user.setUserInfo(userData)
         userId = userData._id;
@@ -107,9 +104,15 @@ const user = new UserInfo(
 );
 
 
+const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api, (card) => {
+    return (api
+        .deleteCard(card._id)
+        .then(res => {
+            card.handleDelete()
+            return res
+        }))
 
-const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api);
-popupDeleteCard.setEventListeners();
+});
 popupDeleteCard.setEventListeners();
 
 editFormValidator.enableValidation();
@@ -134,17 +137,15 @@ const popupAddCard = new PopupWithForm(
     addCardSelector,
     ({placeInput, urlInput}) => {
         return (api.saveNewCard(placeInput, urlInput, [])
-            .then((res) => {
-                cardsList.addItemToTop({name: placeInput, link: urlInput, likes: res.likes, id: res._id},
-                    "#card",
-                    user._id,
-                    api,
-                );
-                return res
-            })
-            .then((res) => {
-                return res
-            }))
+                .then((res) => {
+                    cardsList.addItemToTop({name: placeInput, link: urlInput, likes: res.likes, id: res._id},
+                        "#card",
+                        user._id,
+                        api,
+                    );
+                    return res
+                })
+        )
     }
 )
 popupAddCard.setEventListeners();
@@ -156,16 +157,15 @@ const popupChangeAvatar = new PopupWithForm(
 
         return (api.changeAvatar(avatarInput)
             .then(res => {
-            user.setAvatar(avatarInput)
-            return res
-        }))
+                user.setAvatar(avatarInput)
+                return res
+            }))
     }
 );
 popupChangeAvatar.setEventListeners();
 
 buttonTypeEdit.addEventListener("click", () => {
-    inputName.value = userName.textContent;
-    inputDescription.value = description.textContent;
+    popupEditForm.setInputValues(user.getUserInfo())
     editFormValidator.resetErrors();
     editFormValidator.toggleButtonState();
     popupEditForm.open();
