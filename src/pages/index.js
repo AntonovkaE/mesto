@@ -41,6 +41,7 @@ const editFormValidator = new FormValidator(validatorSetting, formEditProfile);
 const addCardFormValidator = new FormValidator(validatorSetting, formAddCard);
 const addAvatarValidator = new FormValidator(validatorSetting, addAvatarForm)
 
+
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-40",
     headers: {

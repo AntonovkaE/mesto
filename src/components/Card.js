@@ -98,12 +98,11 @@ export class Card {
 
     }
 
-    _handleDelete(submit, popup) {
+    _handleDelete() {
         return (this._api
-            .deleteCard(this._id, submit, popup)
+            .deleteCard(this._id)
             .then(() => {
-                // this._element = null;
-                //Обязательно ли делать равным нулем?
+                this._element = null;
                 this._element.remove();
 
             })
