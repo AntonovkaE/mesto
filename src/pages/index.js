@@ -105,7 +105,6 @@ const user = new UserInfo(
 
 const popupDeleteCard = new PopupConfirmation(deleteCardSelector, api);
 popupDeleteCard.setEventListeners();
-popupDeleteCard.setEventListeners();
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();

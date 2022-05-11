@@ -98,15 +98,16 @@ export class Card {
 
     }
 
-    _handleDelete() {
-        return (this._api
-            .deleteCard(this._id)
-            .then(() => {
-                this._element = null;
-                this._element.remove();
-
-            })
-            .catch((err) => console.log(err)))
-    }
+    // _handleDelete() {
+    //     return (this._api
+    //         .deleteCard(this._id)
+    //         .then((res) => {
+    //             console.log(res)
+    //             this._element.remove();
+    //             this._element = null;
+    //
+    //         })
+    //         .catch((err) => console.log(err)))
+    // }
 
 }

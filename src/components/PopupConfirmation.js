@@ -15,7 +15,18 @@ export default class PopupConfirmation extends Popup {
   }
 
   handleFormSubmit() {
-    return this._card._handleDelete(this._submitButton, this)
+      console.log(this._card._element)
+      this._api
+          .deleteCard(this._card._id)
+          .then(() => {this._card._element.remove()
+              this._card._element = null})
+          .then(() => this.close())
+          .catch((err) => {
+              console.log(err);
+          })
+          .finally(() => {
+              this.renderLoading(false)
+          });
 
   }
 
@@ -25,13 +36,13 @@ export default class PopupConfirmation extends Popup {
       evt.preventDefault();
       this.renderLoading(true, "Удаление...")
       this.handleFormSubmit()
-          .then(() => this.close())
-          .catch((err) => {
-              console.log(err);
-          })
-          .finally(() => {
-            this.renderLoading(false)
-          });
+          // .then(() => this.close())
+          // .catch((err) => {
+          //     console.log(err);
+          // })
+          // .finally(() => {
+          //   this.renderLoading(false)
+          // });
     });
   }
   renderLoading(isLoading, buttonText='Сохранение...') {
