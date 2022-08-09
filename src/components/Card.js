@@ -44,7 +44,7 @@ export class Card {
         if (this._isLiked(this._likes)) {
             this._likeButton.classList.add("card__button_like_active");
         }
-        if (this._userId == this._owner || this._owner == undefined) {
+        if (this._userId === this._owner || this._owner == undefined) {
             this.deleteButton
                 .classList.remove("hidden");
         }
@@ -62,7 +62,7 @@ export class Card {
     }
 
     _isLiked(likes) {
-        return likes.some(elem => elem._id == this._userId)
+        return likes.some(elem => elem._id === this._userId)
     }
 
     _handleLike() {
@@ -71,7 +71,7 @@ export class Card {
             this._api.deleteLike(this._id)
                 .then(res => {
                     this._likeButton.classList.toggle("card__button_like_active");
-                    if (res.likes.length == 0) {
+                    if (res.likes.length === 0) {
                         this._likeCount.classList.add('hidden')
                     }
                     this._likes = res.likes;
